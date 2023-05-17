@@ -5,5 +5,12 @@ export default defineConfig({
 	plugins: [sveltekit()],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
+	},
+	server:{
+		port: 3000,
+		proxy: {'/api': {
+			target: 'http://localhost:4500',
+			rewrite: path => path.replace(/^\/api/, '')
+		}}
 	}
 });
