@@ -10,6 +10,11 @@
 	import TheFooter from '$lib/components/TheFooter.svelte';
 </script>
 
+<svelte:head>
+	<title>Full Stack Mike IO</title>
+		<meta name="author" content="Michael Spinks" />
+</svelte:head>
+
 <!-- App Shell -->
 <AppShell class="min-h-screen flex flex-col">
 	<svelte:fragment slot="header">
@@ -19,6 +24,6 @@
 	<!-- Page Route Content -->
 	<slot />
 	<svelte:fragment slot="pageFooter">
-		<TheFooter/>
+		<TheFooter />
 	</svelte:fragment>
 </AppShell>
