@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 
 	const links = [
@@ -7,10 +8,23 @@
 		{ name: 'Contact', to: '/contact' }
 	];
 
+	const socialLinks = [
+		{
+			name: 'linkedin',
+			svgPath: '',
+			href: 'https://www.linkedin.com/in/michael-spinks-254879201/'
+		},
+		{
+			name: 'linkedin',
+			svgPath: '',
+			href: 'http://github.com/mikespinks0401'
+		}
+	];
+
 	const year = new Date().getFullYear();
 </script>
 
-<div class="py-4 bg-surface-100-800-token">
+<div class="py-4 bg-surface-200-700-token">
 	<div class="container mx-auto flex">
 		<div class="flex-1 flex gap-2">
 			<LightSwitch />
@@ -20,16 +34,21 @@
 				>FullStackMike.io</a
 			>
 		</div>
-		<div class="flex-1 flex justify-center text-sm items-end">
+		<div class="flex-1 flex justify-center text-sm ">
 			Copyright <i class="px-1">©</i>
 			{year} fullstackmike.io All Rights Reserved
 		</div>
-		<ul class="flex-1 flex justify-end divide-x">
-			{#each links as link}
-				<li class="px-2">
-					<a href={link.to}>{link.name} </a>
-				</li>
-			{/each}
-		</ul>
+		<div class="flex flex-1">
+			<a class="btn-icon btn-icon-sm hover:variant-soft-primary" target="_blank" href="https://github.com/mikespinks0401">
+				<i class="fab fa-github" />
+			</a>
+			<ul class="flex-1 flex justify-end">
+				{#each links as link}
+					<li class="px-2">
+						<a href={link.to}>{link.name} </a>
+					</li>
+				{/each}
+			</ul>
+		</div>
 	</div>
 </div>
