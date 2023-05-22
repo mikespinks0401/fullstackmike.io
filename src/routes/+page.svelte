@@ -11,19 +11,21 @@
 	/>
 </svelte:head>
 <div class="h-full mx-auto flex flex-col items-center">
-	<div class="container grid grid-cols-1 md:grid-cols-2 mt-8">
+	<div class="container p-4 grid grid-cols-1 md:grid-cols-2 md:p-0 md:mt-8">
 		<div class="grid-cols-1 flex flex-col gap-2 min-h-full justify-center">
-			<h1 class="text-6xl font-black" data-test="hero-title">Transform Your Online Presence</h1>
-			<h4 class="text-xl !opacity-80" data-test="hero-subtitle">
+			<h1 class="!text-3xl md:text-6xl font-black" data-test="hero-title">
+				Transform Your Online Presence
+			</h1>
+			<h4 class="md:text-xl !opacity-70 font-semibold tracking-tighter" data-test="hero-subtitle">
 				Michael Spinks - You Full Stack Developer
 			</h4>
-			<p data-test="hero-description" class="opacity-70">
+			<p data-test="hero-description" class="opacity-50">
 				Are you looking for a website that stands out from the crowd? Want to enhance your
 				business's success in the digital world? Look no further! As a skilled and experienced
 				website developer, I offer a range of services to take your online presence to the next
 				level.
 			</p>
-			<div class="flex gap-2 pt-4">
+			<div class="flex flex-col gap-2 pt-4 md:flex-row">
 				<a class="btn btn-lg variant-filled-primary !text-white font-black" href="/contact"
 					>Contact Now</a
 				>

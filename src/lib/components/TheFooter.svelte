@@ -25,21 +25,20 @@
 </script>
 
 <div class="py-4 bg-surface-200-700-token">
-	<div class="container mx-auto flex">
-		<div class="flex-1 flex gap-2">
+	<div class="container mx-auto px-4 lg:px-0 flex flex-col items-center lg:flex-row gap-1">
+		<div class="flex-1 flex flex-col items-center lg:items-start lg:flex-row gap-1 lg:gap-2">
 			<LightSwitch />
-			<a
-				href="/"
-				class="font-bold bg-clip-text text-transparent bg-gradient-to-br from-secondary-900 to-primary-900 dark:from-secondary-500 dark:to-tertiary-500 brightness-200"
-				>FullStackMike.io</a
-			>
 		</div>
-		<div class="flex-1 flex justify-center text-sm ">
-			Copyright <i class="px-1">©</i>
-			{year} fullstackmike.io All Rights Reserved
+		<div class="flex-1 flex justify-center text-sm">
+			<i class="px-1">©</i>
+			{year} fullstackmike.io
 		</div>
 		<div class="flex flex-1">
-			<a class="btn-icon btn-icon-sm hover:variant-soft-primary" target="_blank" href="https://github.com/mikespinks0401">
+			<a
+				class="btn-icon btn-icon-sm hover:variant-soft-primary"
+				target="_blank"
+				href="https://github.com/mikespinks0401"
+			>
 				<i class="fab fa-github" />
 			</a>
 			<ul class="flex-1 flex justify-end">

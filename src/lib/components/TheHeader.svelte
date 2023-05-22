@@ -30,13 +30,13 @@
 			<svelte:fragment slot="lead">
 				<div>
 					<strong
-						class="text-xl uppercase font-black bg-clip-text text-transparent bg-gradient-to-tr from-primary-700 to-secondary-500 dark:from-primary-600 dark:to-secondary-500 dark:brightness-200"
+						class="text-xl uppercase box-decoration-clone font-black bg-clip-text text-transparent bg-gradient-to-br from-primary-700 to-secondary-500 dark:from-primary-600 dark:to-secondary-500 dark:brightness-200"
 						><a href="/">FullStackMike</a></strong
 					>
 				</div></svelte:fragment
 			>
 			<svelte:fragment slot="default">
-				<div class="flex">
+				<div class="hidden lg:flex">
 					<div class="flex-1" />
 					<ul class="flex justify-center gap-8 flex-1">
 						{#each links as link}
@@ -53,8 +53,8 @@
 				</div>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
-				<a class="btn btn-sm variant-filled-primary text-white" href="/contact">
-					<span class="font-bold text-lg">Contact Now</span>
+				<a class="hidden md:block btn btn-sm variant-filled-primary text-white" href="/contact">
+					<span class="font-bold text-lg text-white dark:text-white">Contact Now</span>
 				</a>
 			</svelte:fragment>
 		</AppBar>
