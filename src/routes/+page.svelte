@@ -40,7 +40,7 @@
 					<section class="img-bg relative overflow-hidden" />
 					<div
 						class="w-96 h-96 bg-contain bg-no-repeat"
-						style="background-image: url('/Michael-Spinks-Hero.png')"
+						style="background-image: url('/michael-spinks-developer.png')"
 					/>
 				</figure>
 				<!-- / -->
