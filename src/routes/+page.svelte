@@ -14,9 +14,9 @@
 		},
 		{
 			icon: '',
-			name: 'Content Management System (CMS) Development',
+			name: 'Responsive Web Design',
 			description:
-				'Efficiently manage and organize your website content with personalized CMS platforms'
+				'Stunning and user-friendly websites that seamlessly adapt to various screen sizes and devices'
 		},
 		{
 			icon: '',
