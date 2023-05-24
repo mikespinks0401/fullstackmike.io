@@ -1,46 +1,22 @@
 <script lang="ts">
 	const services = [
 		{
-			icon: '',
-			name: 'Front End Development',
+			icon: 'fa-solid fa-palette',
+			name: 'Custom Web Development',
 			description:
-				'Stand out from the competition with captivating and memorable designs for sections, pages, or static websites.'
+				'Get a unique and tailor-made website that represent your small business. I prioritize a professional online presence to engage your target audience effectively.'
 		},
 		{
-			icon: '',
-			name: 'Back End Development',
+			icon: 'fa-brands fa-wordpress',
+			name: 'WordPress Development',
 			description:
-				'Customize the backend with tailored business logic to fulfill your unique demands and requirements'
+				'Empower your small business with a customized WordPress website that reflects your brand identity and allows easy content updates.'
 		},
 		{
-			icon: '',
-			name: 'Responsive Web Design',
+			icon: 'fa-solid fa-square-poll-vertical',
+			name: 'SEO & Speed Optimizations',
 			description:
-				'Stunning and user-friendly websites that seamlessly adapt to various screen sizes and devices'
-		},
-		{
-			icon: '',
-			name: 'Custom Web Application Development',
-			description:
-				'Address your specific business needs and processes through the creation of bespoke web applications'
-		},
-		{
-			icon: '',
-			name: 'Website Maintenance and Support',
-			description:
-				'Ensure a secure web environment by staying up to date with software upgrades, protecting against vulnerabilities and exploits'
-		},
-		{
-			icon: '',
-			name: 'SEO Optimization',
-			description:
-				"Drive organic traffic and enhance the overall customer experience by optimizing your website's search engine visibility"
-		},
-		{
-			icon: '',
-			name: 'Speed Optimzations',
-			description:
-				"Transform your web app's performance with diagnostic optimizations aimed at bringing it to life with lightning-fast speed"
+				"Improve your website's visibility in search engine results through keyword research, proven strategies, and speed optimizations."
 		}
 	];
 </script>
@@ -62,28 +38,32 @@
 		class="container max-w-7xl p-4 grid grid-cols-1 sm:px-8 md:px-16 md:grid-cols-2 md:mt-14"
 	>
 		<div
-			class="grid-cols-1 flex flex-col gap-2 min-h-full relative justify-center md:bottom-6 max-w-lg"
+			class="grid-cols-1 flex flex-col gap-2 min-h-full relative justify-center md:bottom-6 max-w-2xl"
 		>
 			<h1 class="!text-3xl md:text-6xl font-black" data-test="hero-title">
-				Ignite Your Web Presence 🔥
+				<span
+					class="bg-clip-text bg-gradient-to-tr text-transparent from-yellow-500 dark:from-yellow-300 to-orange-700 dark:to-orange-500"
+					>Ignite</span
+				> Your Web Presence 🔥
 			</h1>
 			<h4 class="md:text-xl !opacity-70 font-semibold tracking-tighter" data-test="hero-subtitle">
 				Michael Spinks - Your Full Stack Developer
 			</h4>
 			<p data-test="hero-description" class="opacity-50">
-				Seeking a standout website that propels your business to digital success? Your search ends
+				<!-- Seeking a standout website that propels your business to digital success? Your search ends
 				here! With expertise as a skilled website developer, I provide an array of services to
-				elevate your online presence.
+				elevate your online presence. -->
+				Elevate your online presence with my expert website development services for digital success.
 			</p>
 			<div class="flex flex-col gap-2 pt-4 md:flex-row">
 				<a class="btn btn-lg variant-filled-primary !text-white font-black" href="/contact"
 					>Contact Now</a
 				>
 				<a
-					class="btn text-secondary-400-500-token font-black hover:variant-ringed-secondary"
+					class="btn text-secondary-500 font-black hover:variant-ringed-secondary"
 					href="/michael-spinks-resume.pdf"
 					target="_blank"
-					download>Download Resume</a
+					download><span> <i class="fa-solid fa-file-lines" /></span><span>Download Resume</span></a
 				>
 			</div>
 		</div>
@@ -106,24 +86,16 @@
 	</section>
 	<!--End Hero Section-->
 	<section class="bg-surface-300-600-token brightness-110 w-full z-10 py-4 min-h-[320px]">
-		<div class="container mx-auto flex flex-col">
+		<div class="container mx-auto flex flex-col px-4 lg:px-0">
 			<h2 class="text-center text-2xl font-semibold pb-4">Services</h2>
 			<!--Services Section-->
-			<div class="grid grid-cols-1 md:grid-cols-3 place-items-center gap-4">
-				{#each services as { name, description }, i}
-					{#if i == 3}
-						<div class="grid grid-cols-1 md:grid-cols-3 md:col-span-3">
-							<div class="col-span-1 col-start-2 flex flex-col px-4">
-								<h5 class="font-bold">{name}</h5>
-								<p class="text-sm">{description}</p>
-							</div>
-						</div>
-					{:else}
-						<div class="col-span-1 flex flex-col px-4">
-							<h5 class="font-bold">{name}</h5>
-							<p class="text-sm">{description}</p>
-						</div>
-					{/if}
+			<div class="flex flex-col md:flex-row justify-around gap-2">
+				{#each services as { name, description, icon }, i}
+					<div class="flex flex-col gap-2 max-w-2xl py-4">
+						<h2 class="font-black text-4xl text-primary-500"><i class={icon} /></h2>
+						<h4 class="font-bold text-lg">{name}</h4>
+						<p class="opacity-80 max-w-md">{description}</p>
+					</div>
 				{/each}
 			</div>
 		</div>
