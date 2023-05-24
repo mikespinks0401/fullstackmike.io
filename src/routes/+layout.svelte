@@ -12,7 +12,7 @@
 
 <svelte:head>
 	<title>Full Stack Mike IO</title>
-		<meta name="author" content="Michael Spinks" />
+	<meta name="author" content="Michael Spinks" />
 </svelte:head>
 
 <!-- App Shell -->
