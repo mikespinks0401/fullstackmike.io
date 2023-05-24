@@ -46,8 +46,12 @@
 						{/each}
 					</ul>
 					<div class="flex-1 flex justify-end text-sm font-semibold">
-						<a class="btn btn-lg bg-initial text-xs text-secondary-500 hover:variant-ringed-secondary" href="/michael-spinks-resume.pdf" download>
-							Download Resume
+						<a
+							class="btn btn-lg bg-initial text-xs text-secondary-500 hover:variant-ringed-secondary"
+							href="/michael-spinks-resume.pdf"
+							download
+						>
+							<span> <i class="fa-solid fa-file-lines"></i></span><span>Download Resume</span>
 						</a>
 					</div>
 				</div>
@@ -64,9 +68,6 @@
 <style lang="postcss">
 	.active {
 		@apply text-primary-300-600-token font-bold;
-	}
-	ul a {
-		@apply transition duration-200;
 	}
 	ul a:hover {
 		@apply text-primary-700;
