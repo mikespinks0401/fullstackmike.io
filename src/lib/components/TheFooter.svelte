@@ -25,29 +25,42 @@
 </script>
 
 <div class="py-4 bg-surface-200-700-token">
-	<div class="container mx-auto px-4 lg:px-0 flex flex-col items-center lg:flex-row gap-1">
-		<div class="flex-1 flex flex-col items-center lg:items-start lg:flex-row gap-1 lg:gap-2">
+	<div class="container mx-auto px-4 lg:px-0 flex flex-col items-center md:flex-row gap-1">
+		<div class="flex-1 flex flex-col items-center lg:items-start sm:flex-row gap-1 lg:gap-2">
 			<LightSwitch />
+			<div class="flex-1 flex  text-sm">
+				<i class="px-1">©</i>
+				{year} fullstackmike.io
+			</div>
 		</div>
-		<div class="flex-1 flex justify-center text-sm">
-			<i class="px-1">©</i>
-			{year} fullstackmike.io
+		<div>
+				<ul class="flex-1 flex justify-end">
+					{#each links as link}
+						<li class="px-2">
+							<a href={link.to}>{link.name} </a>
+						</li>
+					{/each}
+				</ul>
 		</div>
-		<div class="flex flex-1">
-			<a
-				class="btn-icon btn-icon-sm hover:variant-soft-primary"
-				target="_blank"
-				href="https://github.com/mikespinks0401"
-			>
-				<i class="fab fa-github" />
-			</a>
-			<ul class="flex-1 flex justify-end">
-				{#each links as link}
-					<li class="px-2">
-						<a href={link.to}>{link.name} </a>
-					</li>
-				{/each}
-			</ul>
+		<div class="flex flex-col items-end flex-1">
+			<div class="flex flex-col items-center">
+				<div>
+					<a
+						class="btn-icon btn-icon-sm hover:variant-soft-primary"
+						target="_blank"
+						href="https://www.linkedin.com/in/michael-spinks"
+					>
+						<i class="fab fa-linkedin" />
+					</a>
+					<a
+						class="btn-icon btn-icon-sm hover:variant-soft-primary"
+						target="_blank"
+						href="https://github.com/mikespinks0401"
+					>
+						<i class="fab fa-github" />
+					</a>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
