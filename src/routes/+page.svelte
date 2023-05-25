@@ -38,7 +38,7 @@
 		class="container max-w-7xl p-4 grid grid-cols-1 sm:px-8 md:px-16 md:grid-cols-2 md:mt-16 md:mb-12"
 	>
 		<div
-			class="grid-cols-1 flex flex-col gap-2 min-h-full relative justify-center md:bottom-6 max-w-2xl"
+			class="py-4 grid-cols-1 flex flex-col gap-2 min-h-full relative justify-center md:bottom-6 max-w-2xl"
 		>
 			<h1 class="!text-3xl md:!text-4xl font-black" data-test="hero-title">
 				<span
@@ -50,9 +50,6 @@
 				Michael Spinks - Your Full Stack Developer
 			</h4>
 			<p data-test="hero-description" class="opacity-50">
-				<!-- Seeking a standout website that propels your business to digital success? Your search ends
-				here! With expertise as a skilled website developer, I provide an array of services to
-				elevate your online presence. -->
 				Elevate your online presence with my expert website development services for digital success.
 			</p>
 			<div class="flex flex-col gap-2 pt-4 md:flex-row">
