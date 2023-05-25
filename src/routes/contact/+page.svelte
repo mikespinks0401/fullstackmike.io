@@ -9,18 +9,18 @@
 	let useToken = '';
 
 	if (browser) {
-		let isDark = document.querySelector("html")?.classList.contains("dark")
+		let isDark = document.querySelector('html')?.classList.contains('dark');
 		// @ts-ignore
 		// window.onloadTurnstileCallback = function () {
-		window.onloadTurnstileCallback =  () => {
+		window.onloadTurnstileCallback = () => {
 			// @ts-ignore
 			turnstile.render('#turnstile', {
-				sitekey: "1x00000000000000000000AA",
+				sitekey: '1x00000000000000000000AA',
 				// ('TURNSTILE_SITE_KEY')
 				callback: function (/** @type {any} */ token) {
-					useToken = token
+					useToken = token;
 				},
-				theme: isDark == true ? "dark": "light"
+				theme: isDark == true ? 'dark' : 'light'
 			});
 		};
 	}
@@ -92,9 +92,10 @@
 					<!--Turnstile-->
 					<div id="turnstile" />
 					<!--End Turnstile-->
-					<button type="submit" class="btn variant-filled-primary font-black !text-white" 
-						disabled={useToken == "" || useToken == undefined}
-						>Send Message</button
+					<button
+						type="submit"
+						class="btn variant-filled-primary font-black !text-white"
+						disabled={useToken == '' || useToken == undefined}>Send Message</button
 					>
 				</form>
 			</div>
@@ -116,12 +117,12 @@
 		@apply text-error-500;
 	}
 
-	input{
-		@apply input bg-white 
+	input {
+		@apply bg-white;
 	}
 
-	textarea{
-		@apply textarea bg-white
+	textarea {
+		@apply textarea bg-white;
 	}
 	input,
 	textarea {
