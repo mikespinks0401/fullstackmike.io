@@ -1,3 +1,6 @@
+<script>
+</script>
+
 <svelte:head>
 	<title>About</title>
 </svelte:head>
@@ -7,22 +10,23 @@
 		<div class="flex flex-col justify-center">
 			<h1 data-test="about-title" class="text-4xl text-center pt-4">About</h1>
 			<div class="mb-12 px-4 lg:px-0">
-
 				<div class="flex justify-center py-2">
 					<div class="h-72 w-56 med:h-72 med:w-56 overflow-hidden relative">
+						<!-- svelte-ignore a11y-img-redundant-alt -->
 						<img
 							src="/about-me-michael-spinks.jpg"
-							class="w-full absolute "
+							class="w-full absolute"
 							alt="Michael Spinks Photo"
 						/>
 					</div>
 				</div>
 
 				<p>
-					Hello there. I have always had a deep interest in programming, and although I didn't fully commit to
-					learning until my late 20s, technology has been a passion of mine since I assembled my
-					first computer at the age of 17. The desire to have the knowledge to create my own SAAS
-					product drove me to pursue a career as a full stack developer.
+					Hello there. My name is Michael Spinks. I have always had a deep interest in programming,
+					and although I didn't fully commit to learning until my late 20s, technology has been a
+					passion of mine since I assembled my first computer at the age of 17. The desire to have
+					the knowledge to create my own SAAS product drove me to pursue a career as a full stack
+					developer.
 				</p>
 				<p>
 					Over the course of my four years of learning, I have acquired a diverse set of programming
