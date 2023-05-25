@@ -1,7 +1,6 @@
 <script>
-	import { browser } from '$app/environment';
-	import { dev } from '$app/environment';
-
+	import { browser, dev } from '$app/environment';
+	import { onMount } from 'svelte';
 	let name = {
 		fName: '',
 		lName: ''
@@ -10,9 +9,9 @@
 	let msg = '';
 	let useToken = '';
 
-	let sitekey = dev ? '1x00000000000000000000AA' : '0x4AAAAAAAFKvgJNc_si5Vif';
+	let sitekey = dev == true ? '1x00000000000000000000AA' : '0x4AAAAAAAFKvgJNc_si5Vif';
 
-	if (browser) {
+	onMount(() => {
 		let isDark = document.querySelector('html')?.classList.contains('dark');
 		// @ts-ignore
 		// window.onloadTurnstileCallback = function () {
@@ -27,7 +26,7 @@
 				theme: isDark == true ? 'dark' : 'light'
 			});
 		};
-	}
+	});
 
 	const info = {
 		name: 'Michael Spinks',
@@ -43,7 +42,7 @@
 <svelte:head>
 	<title>Contact</title>
 	<script
-		src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback"
+		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
 		defer
 	></script>
 </svelte:head>
