@@ -1,5 +1,7 @@
 <script>
 	import { browser } from '$app/environment';
+	import { dev } from '$app/environment';	
+	
 	let name = {
 		fName: '',
 		lName: ''
@@ -8,6 +10,8 @@
 	let msg = '';
 	let useToken = '';
 
+	let sitekey = dev ? '1x00000000000000000000AA' : '0x4AAAAAAAFKvgJNc_si5Vif'
+
 	if (browser) {
 		let isDark = document.querySelector("html")?.classList.contains("dark")
 		// @ts-ignore
@@ -15,7 +19,7 @@
 		window.onloadTurnstileCallback =  () => {
 			// @ts-ignore
 			turnstile.render('#turnstile', {
-				sitekey: "1x00000000000000000000AA",
+				sitekey,
 				// ('TURNSTILE_SITE_KEY')
 				callback: function (/** @type {any} */ token) {
 					useToken = token
