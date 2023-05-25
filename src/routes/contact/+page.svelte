@@ -118,11 +118,11 @@
 	}
 
 	input {
-		@apply bg-white;
+		@apply form-input bg-white;
 	}
 
 	textarea {
-		@apply textarea bg-white;
+		@apply form-textarea bg-white;
 	}
 	input,
 	textarea {
