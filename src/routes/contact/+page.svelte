@@ -116,9 +116,6 @@
 		@apply text-error-500;
 	}
 
-	label{
-		@apply label 
-	}
 
 	input{
 		@apply form-input bg-white 
