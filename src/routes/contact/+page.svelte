@@ -12,10 +12,9 @@
 	onMount(() => {
 		let isDark = document.querySelector('html')?.classList.contains('dark');
 		let useTheme = isDark == true ? 'dark' : 'light';
-		let sitekey =
-			document.location.hostname == 'fullstackmike.io' || document.location.hostname.includes('fullstackmike-io')
-				? '0x4AAAAAAAFKvgJNc_si5Vif'
-				: '1x00000000000000000000AA';
+		let sitekey = document.location.hostname.includes('localhost')
+			? '1x00000000000000000000AA'
+			: '0x4AAAAAAAFKvgJNc_si5Vif';
 		// @ts-ignore
 		// window.onloadTurnstileCallback = function () {
 		// window.onloadTurnstileCallback = function () {
@@ -59,6 +58,15 @@
 	<!-- <script
 		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
 		defer
+	></script> -->
+	<!-- <script
+		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
+	></script> -->
+	<!-- <script
+		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
+	></script> -->
+	<!-- <script
+		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
 	></script> -->
 	<!-- <script
 		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
