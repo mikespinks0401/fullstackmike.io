@@ -5,9 +5,20 @@
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
-	import { AppShell } from '@skeletonlabs/skeleton';
+	import { AppShell, Drawer, LightSwitch, AppBar, drawerStore } from '@skeletonlabs/skeleton';
 	import TheHeader from '$lib/components/TheHeader.svelte';
 	import TheFooter from '$lib/components/TheFooter.svelte';
+
+	const links = [
+		{ name: 'Home', to: '/' },
+		{ name: 'Projects', to: '/projects' },
+		{ name: 'About', to: '/about' },
+		{ name: 'Contact', to: '/contact' }
+	];
+
+	const closeMenu = () => {
+		drawerStore.close()
+	}
 </script>
 
 <svelte:head>
@@ -15,6 +26,24 @@
 	<meta name="author" content="Michael Spinks" />
 </svelte:head>
 
+<!-- Drawer -->
+<Drawer>
+	<AppBar>
+		<svelte:fragment slot="lead">
+			<div class="flex justify-end"><p>FULLSTACKMIKE</p></div>
+		</svelte:fragment>
+		<svelte:fragment slot="trail">
+			<div class="flex justify-end"><LightSwitch /></div>
+		</svelte:fragment>
+	</AppBar>
+	<ul class="flex flex-col">
+		{#each links as link}
+			<li class="w-full ">
+				<a on:click={closeMenu} class="w-full" href={link.to}>{link.name}</a>
+			</li>
+		{/each}
+	</ul>
+</Drawer>
 <!-- App Shell -->
 <AppShell class="min-h-screen flex flex-col">
 	<svelte:fragment slot="header">
