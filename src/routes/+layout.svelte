@@ -8,14 +8,9 @@
 	import { AppShell, Drawer, LightSwitch, AppBar, drawerStore } from '@skeletonlabs/skeleton';
 	import TheHeader from '$lib/components/TheHeader.svelte';
 	import TheFooter from '$lib/components/TheFooter.svelte';
+	import { useRoutes } from './homeRoutes';
 
-	const links = [
-		{ name: 'Home', to: '/' },
-		{ name: 'Projects', to: '/projects' },
-		{ name: 'About', to: '/about' },
-		{ name: 'Contact', to: '/contact' }
-	];
-
+	const links = useRoutes('Home', 'About', 'Projects', 'Contact')
 	const closeMenu = () => {
 		drawerStore.close()
 	}
@@ -44,6 +39,7 @@
 		{/each}
 	</ul>
 </Drawer>
+<!--Drawer end-->
 <!-- App Shell -->
 <AppShell class="min-h-screen flex flex-col">
 	<svelte:fragment slot="header">

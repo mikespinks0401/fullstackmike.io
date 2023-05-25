@@ -3,22 +3,26 @@
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	import { useRoutes } from '../../routes/homeRoutes'; 
 	import type {DrawerSettings} from "@skeletonlabs/skeleton"
 	
-	const links = [
-		{ name: 'Projects', to: '/projects' },
-		{ name: 'About', to: '/about' },
-		{ name: 'Contact', to: '/contact' }
-	];
+	
+
+	const links = useRoutes('about', 'projects', 'contact')
+
 	let name:string;
-	onMount(() => {
-		window.addEventListener("resize", ()=> {
-			if(window.outerWidth > 1024){
-				drawerStore.close()
-			}
-		})
-		console.log(name)
-	});
+	let windowWidth:number
+	$: if(windowWidth > 1024){
+		drawerStore.close()
+	}
+	// onMount(() => {
+	// 	window.addEventListener("resize", ()=> {
+	// 		if(window.outerWidth > 1024){
+	// 			drawerStore.close()
+	// 		}
+	// 	})
+	// 	console.log(name)
+	// });
 	let curPath: string;
 	$: {
 		if (browser) {
@@ -40,9 +44,10 @@
 </script>
 
 <!-- <div class="bg-surface-200-700-token"> -->
-
+<svelte:window bind:outerWidth={windowWidth}/>
 <div class="bg-surface-200-700-token brightness-105">
-	<div class="container mx-auto">
+	<!-- <div class="container mx-auto"> -->
+	<div class="px-3 mx-auto">
 		<AppBar class="!bg-inherit">
 			<svelte:fragment slot="lead">
 				<div>
