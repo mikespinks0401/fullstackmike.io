@@ -9,18 +9,18 @@
 	let useToken = '';
 
 	if (browser) {
-		let isDark = document.querySelector('html')?.classList.contains('dark');
+		let isDark = document.querySelector("html")?.classList.contains("dark")
 		// @ts-ignore
 		// window.onloadTurnstileCallback = function () {
-		window.onloadTurnstileCallback = () => {
+		window.onloadTurnstileCallback =  () => {
 			// @ts-ignore
 			turnstile.render('#turnstile', {
-				sitekey: '1x00000000000000000000AA',
+				sitekey: "1x00000000000000000000AA",
 				// ('TURNSTILE_SITE_KEY')
 				callback: function (/** @type {any} */ token) {
-					useToken = token;
+					useToken = token
 				},
-				theme: isDark == true ? 'dark' : 'light'
+				theme: isDark == true ? "dark": "light"
 			});
 		};
 	}
@@ -56,14 +56,14 @@
 					soon as possible.
 				</p>
 			</div>
-			<div class="col-span-12 md:col-span-8">
+			<div class="col-span-12 md:col-span-8 pb-8">
 				<form
 					on:submit|preventDefault={handleSubmit}
 					action="#"
 					class="flex flex-col max-w-2xl mx-auto gap-2"
 				>
 					<div class="flex-1">
-						<label for="name" class="required">Name</label>
+						<label for="name" class="required label">Name</label>
 						<div class="flex flex-col md:flex-row gap-2">
 							<input
 								type="text"
@@ -82,20 +82,19 @@
 						</div>
 					</div>
 					<div class="">
-						<label for="email" class="required">Email</label>
+						<label for="email" class="label required">Email</label>
 						<input type="email" name="form-email" placeholder="Email" bind:value={email} />
 					</div>
 					<div class="w-full">
-						<label for="message" class="required">Enter Your Message</label>
+						<label for="message" class="label required">Enter Your Message</label>
 						<textarea name="form-message" rows="5" class="" bind:value={msg} />
 					</div>
 					<!--Turnstile-->
 					<div id="turnstile" />
 					<!--End Turnstile-->
-					<button
-						type="submit"
-						class="btn variant-filled-primary font-black !text-white"
-						disabled={useToken == '' || useToken == undefined}>Send Message</button
+					<button type="submit" class="btn variant-filled-primary font-black !text-white" 
+						disabled={useToken == "" || useToken == undefined}
+						>Send Message</button
 					>
 				</form>
 			</div>
@@ -117,12 +116,16 @@
 		@apply text-error-500;
 	}
 
-	input {
-		@apply form-input bg-white;
+	label{
+		@apply label 
 	}
 
-	textarea {
-		@apply form-textarea bg-white;
+	input{
+		@apply form-input bg-white 
+	}
+
+	textarea{
+		@apply form-textarea bg-white
 	}
 	input,
 	textarea {
