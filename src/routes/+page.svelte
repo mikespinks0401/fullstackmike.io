@@ -35,12 +35,12 @@
 <div class="h-full mx-auto flex flex-col items-center">
 	<!--Begin Hero Section-->
 	<section
-		class="container max-w-7xl p-4 grid grid-cols-1 sm:px-8 md:px-16 md:grid-cols-2 md:mt-14"
+		class="container max-w-7xl p-4 grid grid-cols-1 sm:px-8 md:px-16 md:grid-cols-2 md:mt-16 md:mb-12"
 	>
 		<div
 			class="grid-cols-1 flex flex-col gap-2 min-h-full relative justify-center md:bottom-6 max-w-2xl"
 		>
-			<h1 class="!text-3xl md:text-6xl font-black" data-test="hero-title">
+			<h1 class="!text-3xl md:!text-4xl font-black" data-test="hero-title">
 				<span
 					class="bg-clip-text bg-gradient-to-tr text-transparent from-yellow-500 dark:from-yellow-300 to-orange-700 dark:to-orange-500"
 					>Ignite</span
@@ -76,7 +76,7 @@
 						<img
 							src="/michael-spinks-developer.png"
 							alt="Michael Spinks Full Stack Develoepr"
-							class="scale:100 md:scale-110 -bottom-10 md:-bottom-14 lg:-bottom-10 right-4 absolute origin-center"
+							class="scale:100 md:scale-110 -bottom-10 md:-bottom-14 lg:-bottom-16 right-4 absolute origin-center"
 						/>
 					</div>
 				</figure>
@@ -85,15 +85,17 @@
 		</div>
 	</section>
 	<!--End Hero Section-->
-	<section class="bg-surface-300-600-token brightness-110 w-full z-10 py-4 min-h-[320px]">
+	<section class="bg-surface-300-600-token brightness-110 w-full z-10  min-h-[320px] pb-8">
 		<div class="container mx-auto flex flex-col px-4 lg:px-0">
-			<h2 class="text-center text-2xl font-semibold pb-4">Services</h2>
+			<h2 class="text-center text-2xl font-semibold md:py-12">Services</h2>
 			<!--Services Section-->
 			<div class="flex flex-col md:flex-row justify-around gap-2">
 				{#each services as { name, description, icon }, i}
-					<div class="flex flex-col gap-1 md:gap-2 max-w-2xl py-4">
-						<h2 class="font-black text-2xl md:text-4xl text-primary-500"><i class={icon} /></h2>
-						<h4 class="font-bold text-md md:text-lg">{name}</h4>
+					<div class="flex flex-col gap-1 md:gap-4 max-w-2xl py-4">
+						<div class="flex flex-col gap-1 md:gap-2">
+							<h2 class="font-black text-2xl md:text-5xl text-primary-500"><i class={icon} /></h2>
+							<h4 class="font-bold text-md md:text-xl">{name}</h4>
+						</div>
 						<p class="opacity-80 max-w-md">{description}</p>
 					</div>
 				{/each}
