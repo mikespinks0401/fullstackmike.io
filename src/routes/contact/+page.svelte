@@ -9,10 +9,13 @@
 	let msg = '';
 	let useToken = '';
 
-	let sitekey = dev == true ? '1x00000000000000000000AA' : '0x4AAAAAAAFKvgJNc_si5Vif';
-
 	onMount(() => {
 		let isDark = document.querySelector('html')?.classList.contains('dark');
+		let useTheme = isDark == true ? 'dark' : 'light';
+		let sitekey =
+			document.location.hostname == 'fullstackmike.io'
+				? '0x4AAAAAAAFKvgJNc_si5Vif'
+				: '1x00000000000000000000AA';
 		// @ts-ignore
 		// window.onloadTurnstileCallback = function () {
 		// window.onloadTurnstileCallback = function () {
@@ -34,7 +37,8 @@
 				callback: function (token) {
 					useToken = token;
 					console.log(`Challenge Success ${token}`);
-				}
+				},
+				theme: useTheme
 			});
 		};
 	});
@@ -55,6 +59,9 @@
 	<!-- <script
 		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
 		defer
+	></script> -->
+	<!-- <script
+		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
 	></script> -->
 	<!-- <script
 		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
