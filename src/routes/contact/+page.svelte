@@ -13,7 +13,7 @@
 		let isDark = document.querySelector('html')?.classList.contains('dark');
 		let useTheme = isDark == true ? 'dark' : 'light';
 		let sitekey =
-			document.location.hostname == 'fullstackmike.io'
+			document.location.hostname == 'fullstackmike.io' || document.location.hostname.includes('fullstackmike-io')
 				? '0x4AAAAAAAFKvgJNc_si5Vif'
 				: '1x00000000000000000000AA';
 		// @ts-ignore
