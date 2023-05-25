@@ -2,7 +2,7 @@
 	const services = [
 		{
 			icon: 'fa-solid fa-palette',
-			name: 'Custom Web Development',
+			name: 'Custom Web Design & Development',
 			description:
 				'Get a unique and tailor-made website that represent your small business. I prioritize a professional online presence to engage your target audience effectively.'
 		},
@@ -16,7 +16,7 @@
 			icon: 'fa-solid fa-square-poll-vertical',
 			name: 'SEO & Speed Optimizations',
 			description:
-				"Improve your website's visibility in search engine results through keyword research, proven strategies, and speed optimizations."
+				"Improve your website's visibility in search engine results through keyword research, speed optimizations, and proven strategies."
 		}
 	];
 </script>
@@ -91,9 +91,9 @@
 			<!--Services Section-->
 			<div class="flex flex-col md:flex-row justify-around gap-2">
 				{#each services as { name, description, icon }, i}
-					<div class="flex flex-col gap-2 max-w-2xl py-4">
-						<h2 class="font-black text-4xl text-primary-500"><i class={icon} /></h2>
-						<h4 class="font-bold text-lg">{name}</h4>
+					<div class="flex flex-col gap-1 md:gap-2 max-w-2xl py-4">
+						<h2 class="font-black text-2xl md:text-4xl text-primary-500"><i class={icon} /></h2>
+						<h4 class="font-bold text-md md:text-lg">{name}</h4>
 						<p class="opacity-80 max-w-md">{description}</p>
 					</div>
 				{/each}
