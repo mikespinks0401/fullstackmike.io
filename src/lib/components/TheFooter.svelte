@@ -26,7 +26,7 @@
 
 <div class="py-4 bg-surface-200-700-token">
 	<div class="container mx-auto px-4 lg:px-0 flex flex-col items-center md:flex-row gap-1">
-		<div class="flex-1 flex flex-col items-center lg:items-start sm:flex-row gap-1 lg:gap-2">
+		<div class="flex-1 flex flex-col items-center lg:items-center sm:flex-row gap-1 lg:gap-2">
 			<LightSwitch />
 			<div class="flex-1 flex  text-sm">
 				<i class="px-1">©</i>
