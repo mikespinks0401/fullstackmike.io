@@ -1,7 +1,7 @@
 <script>
 	import { browser } from '$app/environment';
-	import { dev } from '$app/environment';	
-	
+	import { dev } from '$app/environment';
+
 	let name = {
 		fName: '',
 		lName: ''
@@ -10,21 +10,21 @@
 	let msg = '';
 	let useToken = '';
 
-	let sitekey = dev ? '1x00000000000000000000AA' : '0x4AAAAAAAFKvgJNc_si5Vif'
+	let sitekey = dev ? '1x00000000000000000000AA' : '0x4AAAAAAAFKvgJNc_si5Vif';
 
 	if (browser) {
-		let isDark = document.querySelector("html")?.classList.contains("dark")
+		let isDark = document.querySelector('html')?.classList.contains('dark');
 		// @ts-ignore
 		// window.onloadTurnstileCallback = function () {
-		window.onloadTurnstileCallback =  () => {
+		window.onloadTurnstileCallback = () => {
 			// @ts-ignore
 			turnstile.render('#turnstile', {
 				sitekey,
 				// ('TURNSTILE_SITE_KEY')
 				callback: function (/** @type {any} */ token) {
-					useToken = token
+					useToken = token;
 				},
-				theme: isDark == true ? "dark": "light"
+				theme: isDark == true ? 'dark' : 'light'
 			});
 		};
 	}
@@ -94,11 +94,14 @@
 						<textarea name="form-message" rows="5" class="" bind:value={msg} />
 					</div>
 					<!--Turnstile-->
-					<div id="turnstile" />
+					{#if browser}
+						<div id="turnstile" />
+					{/if}
 					<!--End Turnstile-->
-					<button type="submit" class="btn variant-filled-primary font-black !text-white" 
-						disabled={useToken == "" || useToken == undefined}
-						>Send Message</button
+					<button
+						type="submit"
+						class="btn variant-filled-primary font-black !text-white"
+						disabled={useToken == '' || useToken == undefined}>Send Message</button
 					>
 				</form>
 			</div>
@@ -120,13 +123,12 @@
 		@apply text-error-500;
 	}
 
-
-	input{
-		@apply form-input bg-white 
+	input {
+		@apply form-input bg-white;
 	}
 
-	textarea{
-		@apply form-textarea bg-white
+	textarea {
+		@apply form-textarea bg-white;
 	}
 	input,
 	textarea {
