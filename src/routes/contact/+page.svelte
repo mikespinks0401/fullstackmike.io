@@ -41,9 +41,12 @@
 
 <svelte:head>
 	<title>Contact</title>
-	<script
+	<!-- <script
 		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
 		defer
+	></script> -->
+	<script
+		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
 	></script>
 </svelte:head>
 
