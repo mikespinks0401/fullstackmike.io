@@ -15,15 +15,26 @@
 		let isDark = document.querySelector('html')?.classList.contains('dark');
 		// @ts-ignore
 		// window.onloadTurnstileCallback = function () {
-		window.onloadTurnstileCallback = () => {
+		// window.onloadTurnstileCallback = function () {
+		// 	// @ts-ignore
+		// 	turnstile.render('#turnstile', {
+		// 		sitekey,
+		// 		// ('TURNSTILE_SITE_KEY')
+		// 		callback: function (/** @type {any} */ token) {
+		// 			useToken = token;
+		// 		},
+		// 		theme: isDark == true ? 'dark' : 'light'
+		// 	});
+		// };
+		window.onloadTurnstileCallback = function () {
 			// @ts-ignore
-			turnstile.render('#turnstile', {
-				sitekey,
-				// ('TURNSTILE_SITE_KEY')
-				callback: function (/** @type {any} */ token) {
+			turnstile.render('#example-container', {
+				sitekey: sitekey,
+				// @ts-ignore
+				callback: function (token) {
 					useToken = token;
-				},
-				theme: isDark == true ? 'dark' : 'light'
+					console.log(`Challenge Success ${token}`);
+				}
 			});
 		};
 	});
@@ -45,8 +56,33 @@
 		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
 		defer
 	></script> -->
-	<script
+	<!-- <script
 		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
+	></script> -->
+	<!-- <script
+		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
+	></script> -->
+	<!-- <script
+		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
+	></script> -->
+	<!-- <script
+		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
+	></script> -->
+	<!-- <script
+		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
+	></script> -->
+	<!-- <script
+		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
+	></script> -->
+	<!-- <script
+		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
+	></script> -->
+	<!-- <script
+		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
+	></script> -->
+	<script
+		src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback"
+		defer
 	></script>
 </svelte:head>
 
@@ -96,9 +132,7 @@
 						<textarea name="form-message" rows="5" class="" bind:value={msg} />
 					</div>
 					<!--Turnstile-->
-					{#if browser}
-						<div id="turnstile" />
-					{/if}
+					<div id="example-container" />
 					<!--End Turnstile-->
 					<button
 						type="submit"
