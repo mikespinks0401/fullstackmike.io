@@ -9,13 +9,12 @@
 	let useToken = '';
 
 	if (browser) {
-		console.log('loaded');
-	let isDark = document.querySelector("html")?.classList.contains("dark")
+		let isDark = document.querySelector("html")?.classList.contains("dark")
 		// @ts-ignore
 		// window.onloadTurnstileCallback = function () {
 		window.onloadTurnstileCallback =  () => {
 			// @ts-ignore
-			turnstile.render('#example-container', {
+			turnstile.render('#turnstile', {
 				sitekey: "1x00000000000000000000AA",
 				// ('TURNSTILE_SITE_KEY')
 				callback: function (/** @type {any} */ token) {
@@ -91,7 +90,7 @@
 						<textarea name="form-message" rows="5" class="" bind:value={msg} />
 					</div>
 					<!--Turnstile-->
-					<div id="example-container" />
+					<div id="turnstile" />
 					<!--End Turnstile-->
 					<button type="submit" class="btn variant-filled-primary font-black !text-white" 
 						disabled={useToken == "" || useToken == undefined}
@@ -115,10 +114,6 @@
 	.required::after {
 		content: '*';
 		@apply text-error-500;
-	}
-
-	label{
-		@apply label 
 	}
 
 	input{
