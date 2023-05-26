@@ -1,6 +1,10 @@
-<script>
-	import { browser, dev } from '$app/environment';
+<script lang="ts">
+	import type { ActionData } from './$types';
+	import type { ModalSettings } from '@skeletonlabs/skeleton';
+	import { dev } from '$app/environment';
 	import { onMount } from 'svelte';
+	import { modalStore } from '@skeletonlabs/skeleton';
+
 	let name = {
 		fName: '',
 		lName: ''
@@ -9,12 +13,22 @@
 	let msg = '';
 	let useToken = '';
 
+	export let form: ActionData;
+	const modal: ModalSettings = {
+		type: 'alert',
+		title: 'Success',
+		body: 'Form Successfully Submitted',
+		buttonTextCancel: "OK"
+	};
 	onMount(() => {
+		if (form?.success) {
+			modalStore.trigger(modal);
+			form.success = false
+			return
+		}
 		let isDark = document.querySelector('html')?.classList.contains('dark');
 		let useTheme = isDark == true ? 'dark' : 'light';
-		let sitekey = document.location.hostname.includes('localhost')
-			? '1x00000000000000000000AA'
-			: '0x4AAAAAAAFKvgJNc_si5Vif';
+		let sitekey = dev == true ? '1x00000000000000000000AA' : '0x4AAAAAAAFKvgJNc_si5Vif';
 		// @ts-ignore
 		// window.onloadTurnstileCallback = function () {
 		// window.onloadTurnstileCallback = function () {
@@ -55,46 +69,6 @@
 
 <svelte:head>
 	<title>Contact</title>
-	<!-- <script
-		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
-		defer
-	></script> -->
-	<!-- <script
-		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
-	></script> -->
-	<!-- <script
-		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
-	></script> -->
-	<!-- <script
-		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
-	></script> -->
-	<!-- <script
-		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
-	></script> -->
-	<!-- <script
-		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
-	></script> -->
-	<!-- <script
-		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
-	></script> -->
-	<!-- <script
-		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
-	></script> -->
-	<!-- <script
-		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
-	></script> -->
-	<!-- <script
-		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
-	></script> -->
-	<!-- <script
-		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
-	></script> -->
-	<!-- <script
-		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
-	></script> -->
-	<!-- <script
-		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback"
-	></script> -->
 	<script
 		src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback"
 		defer
@@ -114,11 +88,7 @@
 				</p>
 			</div>
 			<div class="col-span-12 md:col-span-8 pb-8">
-				<form
-					on:submit|preventDefault={handleSubmit}
-					action="#"
-					class="flex flex-col max-w-2xl mx-auto gap-2"
-				>
+				<form method="POST" class="flex flex-col max-w-2xl mx-auto gap-2">
 					<div class="flex-1">
 						<label for="name" class="required label">Name</label>
 						<div class="flex flex-col md:flex-row gap-2">
@@ -144,13 +114,12 @@
 					</div>
 					<div class="w-full">
 						<label for="message" class="label required">Enter Your Message</label>
-						<textarea name="form-message" rows="5" class="" bind:value={msg} />
+						<textarea name="form-msg" rows="5" class="" bind:value={msg} />
 					</div>
 					<!--Turnstile-->
 					<div id="example-container" />
 					<!--End Turnstile-->
 					<button
-						type="submit"
 						class="btn variant-filled-primary font-black !text-white"
 						disabled={useToken == '' || useToken == undefined}>Send Message</button
 					>
