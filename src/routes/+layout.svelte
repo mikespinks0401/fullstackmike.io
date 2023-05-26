@@ -5,7 +5,7 @@
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
-	import { AppShell, Drawer, LightSwitch, AppBar, drawerStore } from '@skeletonlabs/skeleton';
+	import { AppShell, Drawer, LightSwitch, AppBar, Modal, drawerStore } from '@skeletonlabs/skeleton';
 	import TheHeader from '$lib/components/TheHeader.svelte';
 	import TheFooter from '$lib/components/TheFooter.svelte';
 	import { useRoutes } from './homeRoutes';
@@ -40,6 +40,7 @@
 	</ul>
 </Drawer>
 <!--Drawer end-->
+<Modal duration={0} buttonPositive="variant-filled-success" />
 <!-- App Shell -->
 <AppShell class="min-h-screen flex flex-col">
 	<svelte:fragment slot="header">
