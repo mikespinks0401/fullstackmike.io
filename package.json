@@ -41,5 +41,8 @@
 		"vitest": "^0.25.3"
 	},
 	"type": "module",
-	"dependencies": {}
+	"dependencies": {
+		"@types/nodemailer": "^6.4.8",
+		"nodemailer": "^6.9.2"
+	}
 }
