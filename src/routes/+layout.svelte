@@ -5,15 +5,22 @@
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
-	import { AppShell, Drawer, LightSwitch, AppBar, Modal, drawerStore } from '@skeletonlabs/skeleton';
+	import {
+		AppShell,
+		Drawer,
+		LightSwitch,
+		AppBar,
+		Modal,
+		drawerStore
+	} from '@skeletonlabs/skeleton';
 	import TheHeader from '$lib/components/TheHeader.svelte';
 	import TheFooter from '$lib/components/TheFooter.svelte';
 	import { useRoutes } from './homeRoutes';
 
-	const links = useRoutes('Home', 'About', 'Projects', 'Contact')
+	const links = useRoutes('Home', 'About', 'Projects', 'Contact');
 	const closeMenu = () => {
-		drawerStore.close()
-	}
+		drawerStore.close();
+	};
 </script>
 
 <svelte:head>
@@ -33,7 +40,7 @@
 	</AppBar>
 	<ul class="flex flex-col">
 		{#each links as link}
-			<li class="w-full ">
+			<li class="w-full">
 				<a on:click={closeMenu} class="w-full" href={link.to}>{link.name}</a>
 			</li>
 		{/each}
@@ -48,7 +55,9 @@
 		<TheHeader />
 	</svelte:fragment>
 	<!-- Page Route Content -->
-	<slot />
+	<div class="">
+		<slot />
+	</div>
 	<svelte:fragment slot="pageFooter">
 		<TheFooter />
 	</svelte:fragment>
