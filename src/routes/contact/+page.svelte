@@ -1,15 +1,15 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
 	import type { ModalSettings } from '@skeletonlabs/skeleton';
-	import { dev } from '$app/environment';
+	import { dev, browser } from '$app/environment';
 	import { onMount } from 'svelte';
 	import { modalStore } from '@skeletonlabs/skeleton';
+	import { env } from '$env/dynamic/public';
 
-	let name = {
-		fName: '',
-		lName: ''
-	};
+	let name = '';
 	let email = '';
+	let subject = '';
+	let phoneNumber = '';
 	let msg = '';
 	let useToken = '';
 
@@ -18,38 +18,25 @@
 		type: 'alert',
 		title: 'Success',
 		body: 'Form Successfully Submitted',
-		buttonTextCancel: "OK"
+		buttonTextCancel: 'OK'
 	};
 	onMount(() => {
 		if (form?.success) {
 			modalStore.trigger(modal);
-			form.success = false
-			return
+			form.success = false;
+			return;
 		}
 		let isDark = document.querySelector('html')?.classList.contains('dark');
 		let useTheme = isDark == true ? 'dark' : 'light';
-		let sitekey = dev == true ? '1x00000000000000000000AA' : '0x4AAAAAAAFKvgJNc_si5Vif';
+		let sitekey = dev == true ? '1x00000000000000000000AA' : env.PUBLIC_TURNSTILE_SITE_KEY;
 		// @ts-ignore
-		// window.onloadTurnstileCallback = function () {
-		// window.onloadTurnstileCallback = function () {
-		// 	// @ts-ignore
-		// 	turnstile.render('#turnstile', {
-		// 		sitekey,
-		// 		// ('TURNSTILE_SITE_KEY')
-		// 		callback: function (/** @type {any} */ token) {
-		// 			useToken = token;
-		// 		},
-		// 		theme: isDark == true ? 'dark' : 'light'
-		// 	});
-		// };
 		window.onloadTurnstileCallback = function () {
 			// @ts-ignore
-			turnstile.render('#example-container', {
+			turnstile.render('#captcha-div', {
 				sitekey: sitekey,
 				// @ts-ignore
 				callback: function (token) {
 					useToken = token;
-					console.log(`Challenge Success ${token}`);
 				},
 				theme: useTheme
 			});
@@ -62,8 +49,23 @@
 		number: '713 766 8719'
 	};
 
-	const handleSubmit = () => {
-		console.log(`name: ${name}, email: ${email}, msg: ${msg}`);
+	const handleSubmit = async () => {
+		let data = new FormData();
+		data.append('form-name', name);
+		data.append('form-email', email);
+		data.append('form-phoneNumber', phoneNumber)
+		data.append('form-subject', subject)
+		data.append('form-msg', msg);
+		data.append('cf-turnstile-response', useToken);
+		try {
+			const res = await fetch('/contact', {
+				method: 'POST',
+				body: data
+			});
+			modalStore.trigger(modal);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 </script>
 
@@ -88,36 +90,41 @@
 				</p>
 			</div>
 			<div class="col-span-12 md:col-span-8 pb-8">
-				<form method="POST" class="flex flex-col max-w-2xl mx-auto gap-2">
+				<form
+					on:submit|preventDefault={handleSubmit}
+					method="POST"
+					class="flex flex-col max-w-2xl mx-auto gap-2"
+				>
 					<div class="flex-1">
-						<label for="name" class="required label">Name</label>
-						<div class="flex flex-col md:flex-row gap-2">
+						<label for="form-name" class="required label">Name</label>
+						<div class="flex flex-col">
 							<input
 								type="text"
-								name="form-fName"
+								name="form-name"
 								class="flex-1"
-								placeholder="First Name"
-								bind:value={name.fName}
-							/>
-							<input
-								type="text"
-								name="form-lName"
-								class="flex-1"
-								placeholder="Last Name"
-								bind:value={name.lName}
+								placeholder="Name"
+								bind:value={name}
 							/>
 						</div>
 					</div>
 					<div class="">
-						<label for="email" class="label required">Email</label>
+						<label for="form-email" class="label required">Email</label>
 						<input type="email" name="form-email" placeholder="Email" bind:value={email} />
 					</div>
+					<div class="">
+						<label for="form-phoneNumber" class="label ">Phone Number</label>
+						<input type="string" name="form-phoneNumber" placeholder="###-###-####" bind:value={phoneNumber} />
+					</div>
+					<div class="">
+						<label for="form-subject" class="label required">Subject</label>
+						<input type="text" name="form-subject" placeholder="Subject" bind:value={subject} />
+					</div>
 					<div class="w-full">
-						<label for="message" class="label required">Enter Your Message</label>
-						<textarea name="form-msg" rows="5" class="" bind:value={msg} />
+						<label for="form-message" class="label required">Enter Your Message</label>
+						<textarea name="form-message" rows="5" class="" bind:value={msg} />
 					</div>
 					<!--Turnstile-->
-					<div id="example-container" />
+					<div id="captcha-div" />
 					<!--End Turnstile-->
 					<button
 						class="btn variant-filled-primary font-black !text-white"
@@ -125,8 +132,8 @@
 					>
 				</form>
 			</div>
-			<div class="col-span-12 mt-8 md:mt-0 md:col-span-4">
-				<div class="text-center">Contact Information</div>
+			<div class="col-span-12 my-8 md:mt-0 md:col-span-4 ">
+				<div class="text-center pb-8">Contact Information</div>
 				<div class="flex flex-col font-semibold">
 					<p>{info.name}</p>
 					<p>{info.number}</p>
