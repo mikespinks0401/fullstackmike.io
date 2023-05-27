@@ -1,21 +1,34 @@
 import type { Actions } from "./$types"
 import { env } from "$env/dynamic/private";
 import { dev } from "$app/environment";
+import { SendMail } from "$lib/server/mailer";
+import type { SendMailInfo } from "$lib/server/mailer";
 
 const Secret = dev == true ? "1x0000000000000000000000000000000AA" : env.TURNSTILE_SECRET_KEY
 
 export const actions = {
-    default: async( event) => {
+    default: async( event ) => {
         const data = await event.request.formData();
-        const fName = data.get('form-fName') 
-        const lName = data.get('form-lName')
-        let name 
-        if(fName && lName){
-           name = `${fName} ${lName}` 
-        }        
+        const name = data.get('form-name')
         const email = data.get('form-email') 
+        const phoneNumber = data.get('form-phoneNumber')
+        const subject = data.get('form-subject')
         const msg = data.get('form-msg') 
+        
+        const emailText = `${name} 
+        ${email}
+        ${phoneNumber ? phoneNumber : ''}
+        
+        
+        ${msg}`
+        const mailInfo:SendMailInfo = {
+            from: env.EMAIL_EMAIL,
+            to: env.EMAIL_EMAIL,
+            subject: `Form Submission - ${subject}`,
+            text: emailText
 
+        }
+        console.log(mailInfo)
         const token = data.get('cf-turnstile-response')
         const ip = event.getClientAddress()
 
@@ -32,9 +45,14 @@ export const actions = {
         })
         const outcome = await result.json()
 
+
+
+
+
         //show success even if email is not sent??
+        //send email if outcome is successful
         if(outcome.success){
-            
+            await SendMail(mailInfo)
         }else {
             return {success: true}
         }
