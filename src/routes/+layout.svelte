@@ -15,7 +15,7 @@
 	} from '@skeletonlabs/skeleton';
 	import TheHeader from '$lib/components/TheHeader.svelte';
 	import TheFooter from '$lib/components/TheFooter.svelte';
-	import { useRoutes } from './homeRoutes';
+	import { useRoutes } from '../lib/utils/homeRoutes';
 
 	const links = useRoutes('Home', 'About', 'Projects', 'Contact');
 	const closeMenu = () => {
@@ -55,7 +55,7 @@
 		<TheHeader />
 	</svelte:fragment>
 	<!-- Page Route Content -->
-	<div class="">
+	<div >
 		<slot />
 	</div>
 	<svelte:fragment slot="pageFooter">
