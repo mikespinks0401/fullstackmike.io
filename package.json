@@ -40,9 +40,5 @@
 		"vite": "^4.3.0",
 		"vitest": "^0.25.3"
 	},
-	"type": "module",
-	"dependencies": {
-		"@types/nodemailer": "^6.4.8",
-		"nodemailer": "^6.9.2"
-	}
+	"type": "module"
 }
