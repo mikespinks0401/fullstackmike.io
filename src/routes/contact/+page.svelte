@@ -80,7 +80,7 @@
 <div>
 	<div class="container mx-auto">
 		<div class="flex flex-col justify-center">
-			<h1 class="text-4xl text-center">Contact</h1>
+			<h1 class="text-4xl pt-4 text-center">Contact</h1>
 		</div>
 		<div class="px-4 grid grid-cols-12">
 			<div class="col-span-12 max-w-xl mx-auto my-12">
