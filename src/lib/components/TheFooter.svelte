@@ -64,3 +64,10 @@
 		</div>
 	</div>
 </div>
+
+
+<style lang="postcss">
+	li a {
+		@apply hover:underline
+	}
+</style>
