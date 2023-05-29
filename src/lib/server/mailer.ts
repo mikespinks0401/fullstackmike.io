@@ -1,6 +1,6 @@
 import { env } from "$env/dynamic/private"
 import { dev } from "$app/environment"
-
+import { sendMailUrl } from "./services/zoho-api"
 
 const AccountId = env.MAIL_API_CLIENT_ID
 const refreshToken = env.MAIL_API_REFRESH_TOKEN
