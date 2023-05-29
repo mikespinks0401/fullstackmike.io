@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
+
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	import { useRoutes } from '../../routes/homeRoutes';
+	import { useRoutes } from '../utils/homeRoutes';
 	import type { DrawerSettings } from '@skeletonlabs/skeleton';
 
 	const links = useRoutes('about', 'projects', 'contact');
@@ -11,13 +12,10 @@
 	let curPath: string;
 	let windowWidth: number;
 
-	
+	$: curPath = $page.url.pathname;
 	$: if (windowWidth > 1024) {
 		drawerStore.close();
 	}
-	afterNavigate(()=>{
-		curPath = window.location.pathname
-	})
 
 	const drawerSettings: DrawerSettings = {
 		width: 'w-[280px] md:w-[480px]'
@@ -40,14 +38,17 @@
 						class="text-2xl uppercase box-decoration-clone font-black bg-clip-text text-transparent bg-gradient-to-br from-primary-700 to-secondary-500 dark:from-primary-600 dark:to-secondary-500 dark:brightness-200"
 						><a href="/">FullStackMike</a></strong
 					>
-				</div></svelte:fragment
-			>
+				</div>
+			</svelte:fragment>
 			<svelte:fragment slot="default">
 				<div class="hidden md:flex">
 					<div class="lg:flex-1" />
 					<ul class="flex justify-center gap-8 items-center flex-1">
 						{#each links as link}
-							<li class="font-bold uppercase">
+							<li
+								class="font-bold uppercase"
+								class:active={curPath.split('/')[1].includes(link.name)}
+							>
 								<a href={link.to}>{link.name}</a>
 							</li>
 						{/each}
@@ -77,9 +78,9 @@
 
 <style lang="postcss">
 	.active {
-		@apply text-primary-300-600-token font-bold;
+		@apply text-primary-600-300-token;
 	}
 	ul a:hover {
-		@apply text-primary-600-300-token;
+		@apply text-primary-600-300-token duration-300;
 	}
 </style>
