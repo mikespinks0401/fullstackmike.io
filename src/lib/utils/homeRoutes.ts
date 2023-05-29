@@ -1,10 +1,10 @@
 	const links = [
-		{ name: 'Home', to: '/'},
-		{ name: 'About', to: '/about' },
-		{ name: 'Projects', to: '/projects' },
-		{ name: 'Blog', to: '/blog'},
-		{ name: 'Services', to: '/services'},
-		{ name: 'Contact', to: '/contact' }
+		{ name: 'home', to: '/'},
+		{ name: 'about', to: '/about' },
+		{ name: 'projects', to: '/projects' },
+		{ name: 'blog', to: '/blog'},
+		{ name: 'services', to: '/services'},
+		{ name: 'contact', to: '/contact' }
 	];
 
     const useRoutes = (...routes: string[]) =>{
