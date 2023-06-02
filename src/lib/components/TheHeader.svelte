@@ -30,12 +30,12 @@
 <!-- <div class="bg-surface-200-700-token brightness-105"> -->
 <div class="bg-transparent bg-surface-200-700-token brightness-105">
 	<!-- <div class="container mx-auto"> -->
-	<div class="px-3 mx-auto">
-		<AppBar class="!bg-inherit">
+	<div class="px-1 mx-auto">
+		<AppBar class="!bg-inherit" padding="p-1 md:p-4">
 			<svelte:fragment slot="lead">
 				<div>
 					<strong
-						class="text-2xl uppercase box-decoration-clone font-black bg-clip-text text-transparent bg-gradient-to-br from-primary-700 to-secondary-500 dark:from-primary-600 dark:to-secondary-500 dark:brightness-200"
+						class="text-lg md:text-2xl uppercase box-decoration-clone font-black bg-clip-text text-transparent bg-gradient-to-br from-primary-700 to-secondary-500 dark:from-primary-600 dark:to-secondary-500 dark:brightness-200"
 						><a href="/">FullStackMike</a></strong
 					>
 				</div>
