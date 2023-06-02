@@ -4,7 +4,6 @@ import { sendMailUrl } from "./services/zoho-api"
 
 const AccountId = env.MAIL_API_CLIENT_ID
 const refreshToken = env.MAIL_API_REFRESH_TOKEN
-let accessToken = env.MAIL_API_ACCESS_TOKEN
 const restMailEndpoint = env.MAIL_API_REST_URL
 
 
@@ -14,28 +13,31 @@ export interface mailer {
 
 }
 export interface SendMailInfo {
-    from: string
-    to: string
+    fromAddress: string
+    toAddress: string
     subject: string
     content: string
 }
 
 
 
-export async function sendMail(info:SendMailInfo){
-
+export async function sendMail(accessToken: string, info:SendMailInfo){
+    console.log("Sending to address " + sendMailUrl + " With " + JSON.stringify(info))
 
     const res = await fetch(sendMailUrl, {
         method: "POST",
         headers:{
-            "Authorization": `Bearer: ${accessToken}`,
-            "Content-Type": "application/json" 
+            "Authorization": `Bearer ${accessToken}`,
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(info) 
     })
+    console.log(await res.json())
     if(res.status == 200){
         return {success: true}
     }
+
+    return {success: false}
 
 }
 
