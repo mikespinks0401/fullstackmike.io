@@ -7,13 +7,11 @@ const refreshToken = env.MAIL_API_REFRESH_TOKEN
 const sendMailUrl = env.MAIL_API_REST_SEND_URL
 let refreshTokenUrl = env.MAIL_API_REFRESH_TOKEN_URL
 
-type MailConfig = {
-}
 
 
 export type SendMailInfo = {
-    from: string
-    to: string
+    fromAddress: string
+    toAddress: string
     subject: string,
     content: string
 }
