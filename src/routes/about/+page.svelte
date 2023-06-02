@@ -22,7 +22,7 @@
 				</div>
 				<div class="py-12">
 					<p>
-						Hello. My name is Michael Spinks. I've been interested in technology since I was a teenager. I built my first  gaming computer when I was either 16 or 17 years old. Building that rig taught me one of the most important values of my life, if I really wanted to do something bad enough, I can get it done. I've tried learning programming before, it just wasn't clicking for me in my first two attempts. It wasn't until in my late 20s that I fully committed to learning. What was different? The deep desire to build SAAS products from A-Z. I have embarked on this journey of becoming a full stack developer and what follows is a little summary about my learning journey. 
+						Hello. My name is Michael Spinks. I built my first  gaming computer when I was either 16 or 17 years old and have always had a passion for technology ever since. Building that rig taught me that if I really wanted to do something bad enough, I can get it done. It wasn't until in my late 20s that I fully committed to learning how to program. What sparked that? The deep desire to possess the knowledge to build a SAAS products from A-Z solo. I have embarked on this journey of becoming a full stack developer and what follows is a little summary of how everything unfolded. 
 					</p>
 					<p>
 						Over the course of my four years of learning, I have acquired a diverse set of
