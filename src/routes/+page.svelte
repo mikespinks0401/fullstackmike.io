@@ -42,19 +42,17 @@
 			<div
 				class="py-4 grid-cols-1 flex flex-col gap-2 min-h-full relative justify-center md:bottom-6 max-w-2xl"
 			>
-				<h1 class="!text-3xl md:!text-4xl font-black" data-test="hero-title">
+				<h1 class=" md:!text-4xl font-black" data-test="hero-title">
 					<span
 						class="bg-clip-text bg-gradient-to-tr text-transparent from-yellow-500 dark:from-yellow-300 to-orange-700 dark:to-orange-500"
 						>Ignite</span
 					> Your Web Presence 🔥
 				</h1>
-				<h4 class="md:text-xl !opacity-70 font-semibold tracking-tighter" data-test="hero-subtitle">
+				<h4 class="hidden md:block md:text-xl !opacity-70 font-semibold tracking-tighter" data-test="hero-subtitle">
 					Michael Spinks - Your Full Stack Developer
 				</h4>
 				<p data-test="hero-description" class="opacity-50">
-					I help small businesses elevate their online presence with my expert website development
-					services for digital success.
-				</p>
+					Elevate your online presence with a fast, modern, and user-	friendly application that will surpass client demands				</p>
 				<div class="flex flex-col gap-2 pt-4 md:flex-row">
 					<a class="btn btn-lg variant-filled-primary !text-white font-black" href="/contact"
 						>Contact Now</a
@@ -72,12 +70,12 @@
 				<!-- Hero Img -->
 				<div class="flex flex-col justify-center space-x-2 items-center">
 					<figure class="">
+						<div class="w-72 h-72 lg:w-96 lg:h-96 pt-16 overflow-hidden relative border  rounded-full md:border-none md:overflow-visible">
 						<section class="img-bg relative overflow-hidden" />
-						<div class="w-72 h-72 lg:w-96 lg:h-96 pt-16 overflow relative">
 							<img
 								src="/michael-spinks-developer.png"
 								alt="Michael Spinks Full Stack Develoepr"
-								class="scale:100 md:scale-110 -bottom-10 md:-bottom-14 lg:-bottom-16 right-4 absolute origin-center"
+								class="scale-150 md:scale-110 -bottom-40 md:-bottom-20  lg:-bottom-16 right-4 absolute origin-center"
 							/>
 						</div>
 					</figure>
@@ -87,7 +85,7 @@
 		</div>
 	</section>
 	<!--End Hero Section-->
-	<section class="bg-surface-300-600-token brightness-110 w-full z-10 min-h-[320px] pb-8">
+	<section class="bg-surface-300-600-token brightness-110 w-full z-10 min-h-[320px] py-8">
 		<div class="container mx-auto flex flex-col px-4 lg:px-0">
 			<h2 class="text-center text-2xl font-semibold md:py-12">Services</h2>
 			<!--Services Section-->
