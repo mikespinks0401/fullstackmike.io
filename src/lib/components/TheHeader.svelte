@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { afterNavigate } from '$app/navigation';
-
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
@@ -8,10 +6,10 @@
 	import type { DrawerSettings } from '@skeletonlabs/skeleton';
 
 	const links = useRoutes('about', 'projects', 'contact');
+	export let isTop: boolean
 
 	let curPath: string;
 	let windowWidth: number;
-
 	$: curPath = $page.url.pathname;
 	$: if (windowWidth > 1024) {
 		drawerStore.close();
@@ -23,15 +21,22 @@
 	const openDrawer = () => {
 		drawerStore.open(drawerSettings);
 	};
+
+	onMount(()=>{
+		window.addEventListener("scroll", () => {
+			console.log("Hello")
+		})
+	})
 </script>
 
 <!-- <div class="bg-surface-200-700-token"> -->
-<svelte:window bind:outerWidth={windowWidth} />
+<svelte:window bind:outerWidth={windowWidth}  />
 <!-- <div class="bg-surface-200-700-token brightness-105"> -->
-<div class="bg-transparent bg-surface-200-700-token brightness-105">
+<!-- <div class="bg-transparent bg-surface-200-700-token brightness-105"> -->
+<div class="bg-transparent brightness-105 transition {isTop === false ? 'bg-surface-200-700-token shadow-md' : 'shadow-none'}">
 	<!-- <div class="container mx-auto"> -->
 	<div class="px-1 mx-auto">
-		<AppBar class="!bg-inherit" padding="p-1 md:p-4">
+		<AppBar class="!bg-inherit" padding="p-1 md:px-4">
 			<svelte:fragment slot="lead">
 				<div>
 					<strong
@@ -42,11 +47,10 @@
 			</svelte:fragment>
 			<svelte:fragment slot="default">
 				<div class="hidden md:flex">
-					<div class="lg:flex-1" />
-					<ul class="flex justify-center gap-8 items-center flex-1">
+					<ul class="flex justify-start gap-8 items-center pl-8  flex-1">
 						{#each links as link}
 							<li
-								class="font-bold uppercase"
+								class="font-black uppercase {curPath.split('/').includes(link.name) ? "": "opacity-50 hover:opacity-90 hover:text-primary-600-300-token"}"
 								class:active={curPath.split('/')[1].includes(link.name)}
 							>
 								<a href={link.to}>{link.name}</a>
@@ -55,7 +59,7 @@
 					</ul>
 					<div class="hidden lg:flex-1 lg:flex justify-end text-sm font-semibold">
 						<a
-							class="btn btn-lg bg-initial text-sm text-secondary-500 hover:variant-ringed-secondary"
+							class="btn btn-md bg-initial text-sm text-secondary-500 hover:variant-ringed-secondary"
 							href="/michael-spinks-resume.pdf"
 							download
 						>
@@ -68,8 +72,8 @@
 				<button on:click={openDrawer}
 					><i class=" md:hidden text-xl btn btn-icon fa-solid fa-bars" /></button
 				>
-				<a class="hidden md:block btn btn-md variant-filled-primary text-white" href="/contact">
-					<span class="font-medium text-lg text-white dark:text-white">Contact Now</span>
+				<a class="hidden md:block btn btn-sm variant-filled-primary text-white" href="/contact">
+					<span class="font-medium text-base text-white dark:text-white">Contact Now</span>
 				</a>
 			</svelte:fragment>
 		</AppBar>
@@ -78,9 +82,8 @@
 
 <style lang="postcss">
 	.active {
-		@apply text-primary-600-300-token;
+		@apply text-primary-600-300-token opacity-100;
 	}
-	ul a:hover {
-		@apply text-primary-600-300-token duration-300;
-	}
+
+
 </style>
