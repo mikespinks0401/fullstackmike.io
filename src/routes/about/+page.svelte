@@ -20,23 +20,23 @@
 						/>
 					</div>
 				</div>
-				<div class="py-12">
+				<div class="py-12 text-xs leading-5">
 					<p>
-						Hello. My name is Michael Spinks. I built my first  gaming computer when I was either 16 or 17 years old and have always had a passion for technology ever since. Building that rig taught me that if I really wanted to do something bad enough, I can get it done. It wasn't until in my late 20s that I fully committed to learning how to program. What sparked that? The deep desire to possess the knowledge to build a SAAS products from A-Z solo. I have embarked on this journey of becoming a full stack developer and what follows is a little summary of how everything unfolded. 
+						Hello. My name is Michael Spinks.👋 I built my first  gaming computer when I was either 16 or 17 years old and have always had a passion for technology ever since.💻🎮 Building that rig taught me that if I really wanted to do something bad enough, I can get it done. It wasn't until in my late 20s that I fully committed to learning how to program. What sparked that? The deep desire to possess the knowledge to build a SAAS products from A-Z solo.💡 I have embarked on this journey of becoming a full stack developer and what follows is a little summary of how everything unfolded. 
 					</p>
 					<p>
 						Over the course of my four years of learning, I have acquired a diverse set of
-						programming languages and technologies. From PHP(where I learned the fundamentals of programming), HTML, CSS, and JavaScript to Linux, React,
+						programming languages and technologies. My journey started with <strong>PHP(where I learned the fundamentals of programming), HTML, CSS, and JavaScript. I then expanded my knowledge to include Linux(through a Raspberry Pi), React,
 						Tailwind, Vue 3, Nuxt 3, Node, Nginx, TypeScript, Git, MySQL, Cypress, GitHub Actions,
-						JWT, Vuetify 3, Go, Svelte, and SvelteKit, I have explored a wide range of tools and
-						frameworks that have shaped my skill set. Although I do not believe that I am a expert in any one area, I feel comfortable enough to dive into whatever part of the stack is necessary to get things moving forward.
+						JWT, Vuetify 3, Go, Svelte, and SvelteKit</strong>. I have explored a wide range of tools and
+						frameworks that have shaped my skill set. Although I do not consider myself an expert in any one area, I feel comfortable enough to dive into whatever part of the stack is necessary to get things moving forward and bring an idea to life.
 					</p>
 					<p>
-						What I enjoy most about programming are the challenges that come with
+							What I enjoy most about programming are the challenges that come with
 						learning new technologies. I remember spending a good chucnk of time wrapping my head around the
 						complexities of implementing an authentication system with JWT in Nuxt 3. I am proud of the fact that I can now confidently implement an auth system with a back-end language and JWT or whatever technology is required. Through
 						perseverance and the ability to slow down and think critically, I have developed
-						problem-solving skills that enable me to tackle any obstacle.
+						problem-solving skills that enable me to tackle any obstacle.🧠💡
 					</p>
 					<p>
 						While I appreciate both front-end and back-end development, I find myself more
@@ -47,7 +47,7 @@
 						collaborate and learn from other developers in a team enviroment. Being part of an awesome team of passionate
 						individuals is one of my future goals as developer. Additionally, I aspire
 						to dive deeper into Svelte and Go, sharpen my skills in Test-Driven Development(TDD),
-						and deliver top-quality software.
+						and deliver top-quality software.🤝💡🚀
 					</p>
 					<p>
 						To stay up to date with the latest trends, I follow various tech-related YouTube
@@ -81,6 +81,6 @@
 
 <style lang="postcss">
 	p {
-		@apply py-1;
+		@apply py-1 indent-4;
 	}
 </style>
