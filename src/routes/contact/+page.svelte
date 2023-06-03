@@ -1,16 +1,19 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
 	import type { ModalSettings } from '@skeletonlabs/skeleton';
-	import { dev, browser } from '$app/environment';
-	import { onMount } from 'svelte';
+	import { z } from 'zod';
+	import { dev } from '$app/environment';
+	import { onMount, tick } from 'svelte';
 	import { modalStore } from '@skeletonlabs/skeleton';
 	import { env } from '$env/dynamic/public';
+	const contactFormSchema = z.object({
+		name: z.string().nonempty('Name is required'),
+		email: z.string().email('Please provide a valid email address'),
+		subject: z.string().nonempty('Subject is required'),
+		phoneNumber: z.string().nullable(),
+		msg: z.string().nonempty('Message is required')
+	});
 
-	let name = '';
-	let email = '';
-	let subject = '';
-	let phoneNumber = '';
-	let msg = '';
 	let useToken = '';
 
 	export let form: ActionData;
@@ -49,22 +52,75 @@
 		number: '713 766 8719'
 	};
 
+	let formData = {
+		name: '',
+		email: '',
+		phoneNumber: '',
+		subject: '',
+		msg: ''
+	};
+	let hasErrors: any[] = [];
+	let isValid = true;
+	let submitted = false;
+
 	const handleSubmit = async () => {
+		submitted = true;
+		if (!validateForm()) {
+			return;
+		}
+		return;
 		let data = new FormData();
-		data.append('form-name', name);
-		data.append('form-email', email);
-		data.append('form-phoneNumber', phoneNumber)
-		data.append('form-subject', subject)
-		data.append('form-msg', msg);
+
+		data.append('form-name', formData.name);
+		data.append('form-email', formData.email);
+		if (formData.phoneNumber.length > 0) {
+			data.append('form-phoneNumber', formData.phoneNumber);
+		}
+		data.append('form-subject', formData.subject);
+		data.append('form-msg', formData.msg);
 		data.append('cf-turnstile-response', useToken);
+
 		try {
-			const res = await fetch('/contact', {
+			await fetch('/contact', {
 				method: 'POST',
 				body: data
 			});
 			modalStore.trigger(modal);
 		} catch (error) {
 			console.log(error);
+		}
+	};
+
+	const validateForm = () => {
+		hasErrors = [];
+		try {
+			contactFormSchema.parse(formData);
+			return true;
+		} catch (error) {
+			if (error instanceof z.ZodError) {
+				error.issues.forEach((value) => {
+					hasErrors.push(value.path[0]);
+					hasErrors = hasErrors;
+				});
+			}
+			console.log(hasErrors);
+			return false;
+		}
+	};
+	// const handleInput = (inputName: string) => {
+		type inputTypeAndVal = {
+			name: string
+			val: string
+		}
+	const handleInput = async(formInput:inputTypeAndVal) => {
+		if (submitted != true) {
+			return;
+		}
+		
+		if (formInput.val.length > 0) {
+			hasErrors = hasErrors.filter((error) => error != formInput.name);
+			hasErrors = hasErrors
+			return
 		}
 	};
 </script>
@@ -99,40 +155,68 @@
 						<label for="form-name" class="required label">Name</label>
 						<div class="flex flex-col">
 							<input
+								on:keydown={() => handleInput({name:"name", val:formData.name})}
 								type="text"
 								name="form-name"
 								class="flex-1"
 								placeholder="Name"
-								bind:value={name}
+								class:input-error={hasErrors.includes('name')}
+								bind:value={formData.name}
 							/>
 						</div>
 					</div>
 					<div class="">
 						<label for="form-email" class="label required">Email</label>
-						<input type="email" name="form-email" placeholder="Email" bind:value={email} />
+						<input
+							on:keydown={() => handleInput({name:"email", val:formData.email})}
+							type="email"
+							name="form-email"
+							placeholder="Email"
+							class:input-error={hasErrors.includes('email')}
+							bind:value={formData.email}
+						/>
 					</div>
 					<div class="">
-						<label for="form-phoneNumber" class="label ">Phone Number</label>
-						<input type="string" name="form-phoneNumber" placeholder="###-###-####" bind:value={phoneNumber} />
+						<label for="form-phoneNumber" class="label">Phone Number</label>
+						<input
+							type="string"
+							name="form-phoneNumber"
+							placeholder="###-###-####"
+							bind:value={formData.phoneNumber}
+						/>
 					</div>
 					<div class="">
 						<label for="form-subject" class="label required">Subject</label>
-						<input type="text" name="form-subject" placeholder="Subject" bind:value={subject} />
+						<input
+							on:keydown={() => handleInput({name:"subject", val:formData.subject})}
+							type="text"
+							name="form-subject"
+							placeholder="Subject"
+							class:input-error={hasErrors.includes('subject')}
+							bind:value={formData.subject}
+						/>
 					</div>
 					<div class="w-full">
 						<label for="form-message" class="label required">Enter Your Message</label>
-						<textarea name="form-message" rows="5" class="" bind:value={msg} />
+						<textarea
+							on:keydown={() => handleInput({name:"msg", val:formData.msg})}
+							name="form-message"
+							rows="5"
+							class:input-error={hasErrors.includes('msg')}
+							bind:value={formData.msg}
+						/>
 					</div>
 					<!--Turnstile-->
 					<div id="captcha-div" />
 					<!--End Turnstile-->
 					<button
 						class="btn variant-filled-primary font-black !text-white"
-						disabled={useToken == '' || useToken == undefined}>Send Message</button
+						disabled={useToken == '' || useToken == undefined || isValid == false}
+						>Send Message</button
 					>
 				</form>
 			</div>
-			<div class="col-span-12 my-8 md:mt-0 md:col-span-4 ">
+			<div class="col-span-12 my-8 md:mt-0 md:col-span-4">
 				<div class="text-center pb-8">Contact Information</div>
 				<div class="flex flex-col font-semibold">
 					<p>{info.name}</p>
