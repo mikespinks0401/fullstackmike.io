@@ -6,6 +6,19 @@
 	import { onMount, tick } from 'svelte';
 	import { modalStore } from '@skeletonlabs/skeleton';
 	import { env } from '$env/dynamic/public';
+
+	type inputTypeAndVal = {
+		name: string;
+		val: string;
+	};
+
+	const modalSuccess: ModalSettings = {
+		type: 'alert',
+		title: 'Success',
+		body: 'Form Successfully Submitted',
+		buttonTextCancel: 'OK'
+	};
+	
 	const contactFormSchema = z.object({
 		name: z.string().nonempty('Name is required'),
 		email: z.string().email('Please provide a valid email address'),
@@ -13,19 +26,13 @@
 		phoneNumber: z.string().nullable(),
 		msg: z.string().nonempty('Message is required')
 	});
-
 	let useToken = '';
 
 	export let form: ActionData;
-	const modal: ModalSettings = {
-		type: 'alert',
-		title: 'Success',
-		body: 'Form Successfully Submitted',
-		buttonTextCancel: 'OK'
-	};
+
 	onMount(() => {
 		if (form?.success) {
-			modalStore.trigger(modal);
+			modalStore.trigger(modalSuccess);
 			form.success = false;
 			return;
 		}
@@ -59,16 +66,14 @@
 		subject: '',
 		msg: ''
 	};
-	let hasErrors: any[] = [];
 	let isValid = true;
-	let submitted = false;
+	let isSubmitted = false;
 
 	const handleSubmit = async () => {
-		submitted = true;
-		if (!validateForm()) {
-			return;
-		}
-		return;
+		isSubmitted = true;
+		// if (!validateForm()) {
+		// 	return;
+		// }
 		let data = new FormData();
 
 		data.append('form-name', formData.name);
@@ -85,42 +90,19 @@
 				method: 'POST',
 				body: data
 			});
-			modalStore.trigger(modal);
+			modalStore.trigger(modalSuccess);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
 	const validateForm = () => {
-		hasErrors = [];
-		try {
-			contactFormSchema.parse(formData);
-			return true;
-		} catch (error) {
-			if (error instanceof z.ZodError) {
-				error.issues.forEach((value) => {
-					hasErrors.push(value.path[0]);
-					hasErrors = hasErrors;
-				});
-			}
-			console.log(hasErrors);
-			return false;
-		}
+		return false	
 	};
 	// const handleInput = (inputName: string) => {
-		type inputTypeAndVal = {
-			name: string
-			val: string
-		}
-	const handleInput = async(formInput:inputTypeAndVal) => {
-		if (submitted != true) {
+	const handleInput = async (formInput: inputTypeAndVal) => {
+		if (isSubmitted != true) {
 			return;
-		}
-		
-		if (formInput.val.length > 0) {
-			hasErrors = hasErrors.filter((error) => error != formInput.name);
-			hasErrors = hasErrors
-			return
 		}
 	};
 </script>
@@ -155,12 +137,11 @@
 						<label for="form-name" class="required label">Name</label>
 						<div class="flex flex-col">
 							<input
-								on:keydown={() => handleInput({name:"name", val:formData.name})}
+								on:keydown={() => handleInput({ name: 'name', val: formData.name })}
 								type="text"
 								name="form-name"
 								class="flex-1"
 								placeholder="Name"
-								class:input-error={hasErrors.includes('name')}
 								bind:value={formData.name}
 							/>
 						</div>
@@ -168,11 +149,10 @@
 					<div class="">
 						<label for="form-email" class="label required">Email</label>
 						<input
-							on:keydown={() => handleInput({name:"email", val:formData.email})}
+							on:keydown={() => handleInput({ name: 'email', val: formData.email })}
 							type="email"
 							name="form-email"
 							placeholder="Email"
-							class:input-error={hasErrors.includes('email')}
 							bind:value={formData.email}
 						/>
 					</div>
@@ -188,26 +168,24 @@
 					<div class="">
 						<label for="form-subject" class="label required">Subject</label>
 						<input
-							on:keydown={() => handleInput({name:"subject", val:formData.subject})}
+							on:keydown={() => handleInput({ name: 'subject', val: formData.subject })}
 							type="text"
 							name="form-subject"
 							placeholder="Subject"
-							class:input-error={hasErrors.includes('subject')}
 							bind:value={formData.subject}
 						/>
 					</div>
 					<div class="w-full">
 						<label for="form-message" class="label required">Enter Your Message</label>
 						<textarea
-							on:keydown={() => handleInput({name:"msg", val:formData.msg})}
+							on:keydown={() => handleInput({ name: 'msg', val: formData.msg })}
 							name="form-message"
 							rows="5"
-							class:input-error={hasErrors.includes('msg')}
 							bind:value={formData.msg}
 						/>
 					</div>
 					<!--Turnstile-->
-					<div id="captcha-div" />
+					<div id="captcha-div" class="mb-1" />
 					<!--End Turnstile-->
 					<button
 						class="btn variant-filled-primary font-black !text-white"
