@@ -33,7 +33,7 @@
 <svelte:window bind:outerWidth={windowWidth}  />
 <!-- <div class="bg-surface-200-700-token brightness-105"> -->
 <!-- <div class="bg-transparent bg-surface-200-700-token brightness-105"> -->
-<div class="bg-transparent brightness-105 transition {isTop === false ? 'bg-surface-200-700-token shadow-md' : 'shadow-none'}">
+<div class="bg-transparent brightness-105 transition {isTop === false ? 'bg-surface-200-700-token shadow-md  dark:shadow-surface-600' : 'shadow-none'}">
 	<!-- <div class="container mx-auto"> -->
 	<div class="px-1 mx-auto">
 		<AppBar class="!bg-inherit" padding="p-1 md:px-4">
@@ -50,7 +50,7 @@
 					<ul class="flex justify-start gap-8 items-center pl-8  flex-1">
 						{#each links as link}
 							<li
-								class="font-black uppercase {curPath.split('/').includes(link.name) ? "": "opacity-50 hover:opacity-90 hover:text-primary-600-300-token"}"
+								class="font-black uppercase {curPath.split('/').includes(link.name) ? "": "opacity-50 hover:opacity-80 hover:text-primary-600-300-token"}"
 								class:active={curPath.split('/')[1].includes(link.name)}
 							>
 								<a href={link.to}>{link.name}</a>
@@ -59,7 +59,7 @@
 					</ul>
 					<div class="hidden lg:flex-1 lg:flex justify-end text-sm font-semibold">
 						<a
-							class="btn btn-md bg-initial text-sm text-secondary-500 hover:variant-ringed-secondary"
+							class="btn btn-md bg-initial text-sm text-secondary-500 hover:variant-soft-secondary "
 							href="/michael-spinks-resume.pdf"
 							download
 						>
