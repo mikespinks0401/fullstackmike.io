@@ -42,7 +42,7 @@
 			<div
 				class="py-4 grid-cols-1 flex flex-col gap-2 min-h-full relative justify-center md:bottom-6 max-w-2xl"
 			>
-				<h1 class=" md:!text-4xl font-black" data-test="hero-title">
+				<h1 class=" !text-xl md:!text-4xl font-black" data-test="hero-title">
 					<span
 						class="bg-clip-text bg-gradient-to-tr text-transparent from-yellow-500 dark:from-yellow-300 to-orange-700 dark:to-orange-500"
 						>Ignite</span
@@ -53,7 +53,7 @@
 				</h4>
 				<p data-test="hero-description" class="opacity-50">
 					Elevate your online presence with a fast, modern, and user-	friendly application that will surpass client demands				</p>
-				<div class="flex flex-col gap-2 pt-4 md:flex-row">
+				<div class="flex flex-col gap-2 pt-8 mg:pt-6 md:flex-row">
 					<a class="btn btn-lg variant-filled-primary !text-white font-black" href="/contact"
 						>Contact Now</a
 					>
