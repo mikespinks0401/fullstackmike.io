@@ -2,7 +2,16 @@ import type { Actions } from "./$types"
 import { env } from "$env/dynamic/private";
 import { dev } from "$app/environment";
 import { sendMail } from "$lib/server/mailer";
+import { z } from "zod"
 import type { SendMailInfo } from "$lib/server/services/zoho-api";
+
+const contactFormSchema = z.object({
+    name: z.string().min(1, {message: "name is required"} ),
+    email: z.string().min(1, {message: "email is required"}).email('Please provide a valid email address'),
+    subject: z.string().min(1, {message: "subject is required"}),
+    phoneNumber: z.string().nullable(),
+    msg: z.string().min(1,{message: 'message is required'})
+});
 
 const Secret = dev == true ? "1x0000000000000000000000000000000AA" : env.TURNSTILE_SECRET_KEY
 const EMAIL_API_KEY = env.CF_MAIL_WORKER_API_KEY
@@ -15,7 +24,7 @@ export const actions = {
         const phoneNumber = data.get('form-phoneNumber')
         const subject = data.get('form-subject')
         const msg = data.get('form-msg') 
-        
+      
         const emailText = `<p>${name}</p><p>${email}</p><p>${phoneNumber ? phoneNumber : ''}</p><p></p><p></p> <pre>${msg}</pre>`
         const mailInfo:SendMailInfo = {
             fromAddress: env.EMAIL_EMAIL,
@@ -24,7 +33,6 @@ export const actions = {
             content: emailText
 
         }
-        console.log(`Mail:INFO - ${mailInfo}`)
         const token = data.get('cf-turnstile-response')
         const ip = event.getClientAddress()
 
