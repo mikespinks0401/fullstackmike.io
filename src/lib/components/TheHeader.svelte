@@ -33,7 +33,7 @@
 <svelte:window bind:outerWidth={windowWidth}  />
 <!-- <div class="bg-surface-200-700-token brightness-105"> -->
 <!-- <div class="bg-transparent bg-surface-200-700-token brightness-105"> -->
-<div class="bg-transparent brightness-105 transition {isTop === false ? 'bg-surface-200-700-token shadow-md  dark:shadow-surface-600' : 'shadow-none'}">
+<div class="bg-transparent brightness-105 transition {isTop === false ? 'bg-surface-200-700-token shadow-md ' : 'shadow-none'}">
 	<!-- <div class="container mx-auto"> -->
 	<div class="px-1 mx-auto">
 		<AppBar class="!bg-inherit" padding="p-1 md:px-4">
