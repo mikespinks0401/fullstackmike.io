@@ -1,9 +1,11 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
 	import type { ModalSettings } from '@skeletonlabs/skeleton';
+	import { page } from "$app/stores"
 	import { z } from 'zod';
 	import { dev } from '$app/environment';
 	import { onMount, tick } from 'svelte';
+	import { enhance } from '$app/forms';
 	import { modalStore } from '@skeletonlabs/skeleton';
 	import { env } from '$env/dynamic/public';
 
@@ -11,6 +13,15 @@
 		name: string;
 		val: string;
 	};
+
+	const modalError: ModalSettings = {
+		type: 'alert',
+		title: 'Error',
+		body: 'There was an error submitting your form',
+		buttonTextCancel: 'OK',
+		backdropClasses: "error-500",
+
+	}
 
 	const modalSuccess: ModalSettings = {
 		type: 'alert',
@@ -27,22 +38,27 @@
 		msg: z.string().nonempty('Message is required')
 	});
 	let useToken = '';
-
+	let widgetId = "";
 	export let form: ActionData;
 
+	$: if(form?.error){
+			modalStore.trigger(modalError)
+		}
 	onMount(() => {
 		if (form?.success) {
 			modalStore.trigger(modalSuccess);
 			form.success = false;
 			return;
 		}
+		//@ts-ignore
+			// turnstile.reset(widgetId: string)			
 		let isDark = document.querySelector('html')?.classList.contains('dark');
 		let useTheme = isDark == true ? 'dark' : 'light';
 		let sitekey = dev == true ? '1x00000000000000000000AA' : env.PUBLIC_TURNSTILE_SITE_KEY;
 		// @ts-ignore
 		window.onloadTurnstileCallback = function () {
 			// @ts-ignore
-			turnstile.render('#captcha-div', {
+			widgetId = turnstile.render('#captcha-div', {
 				sitekey: sitekey,
 				// @ts-ignore
 				callback: function (token) {
@@ -50,7 +66,9 @@
 				},
 				theme: useTheme
 			});
+			console.log(widgetId)
 		};
+
 	});
 
 	const info = {
@@ -69,38 +87,10 @@
 	let isValid = true;
 	let isSubmitted = false;
 
-	const handleSubmit = async () => {
-		isSubmitted = true;
-		// if (!validateForm()) {
-		// 	return;
-		// }
-		let data = new FormData();
-
-		data.append('form-name', formData.name);
-		data.append('form-email', formData.email);
-		if (formData.phoneNumber.length > 0) {
-			data.append('form-phoneNumber', formData.phoneNumber);
-		}
-		data.append('form-subject', formData.subject);
-		data.append('form-msg', formData.msg);
-		data.append('cf-turnstile-response', useToken);
-
-		try {
-			await fetch('/contact', {
-				method: 'POST',
-				body: data
-			});
-			modalStore.trigger(modalSuccess);
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
 	const validateForm = () => {
 		return false	
 	};
-	// const handleInput = (inputName: string) => {
-	const handleInput = async (formInput: inputTypeAndVal) => {
+	const handleInput = async () => {
 		if (isSubmitted != true) {
 			return;
 		}
@@ -128,16 +118,16 @@
 				</p>
 			</div>
 			<div class="col-span-12 md:col-span-8 pb-8">
+				<!-- on:submit={handleSubmit} -->
 				<form
-					on:submit|preventDefault={handleSubmit}
 					method="POST"
 					class="flex flex-col max-w-2xl mx-auto gap-2"
+					use:enhance
 				>
 					<div class="flex-1">
-						<label for="form-name" class="required label">Name</label>
+						<label for="form-name" class="required label inline">Name</label>{#if form?.error && form?.missingData.includes('name')}<span class="error">NAME REQUIRED</span>{/if}
 						<div class="flex flex-col">
 							<input
-								on:keydown={() => handleInput({ name: 'name', val: formData.name })}
 								type="text"
 								name="form-name"
 								class="flex-1"
@@ -149,7 +139,6 @@
 					<div class="">
 						<label for="form-email" class="label required">Email</label>
 						<input
-							on:keydown={() => handleInput({ name: 'email', val: formData.email })}
 							type="email"
 							name="form-email"
 							placeholder="Email"
@@ -168,7 +157,6 @@
 					<div class="">
 						<label for="form-subject" class="label required">Subject</label>
 						<input
-							on:keydown={() => handleInput({ name: 'subject', val: formData.subject })}
 							type="text"
 							name="form-subject"
 							placeholder="Subject"
@@ -178,8 +166,7 @@
 					<div class="w-full">
 						<label for="form-message" class="label required">Enter Your Message</label>
 						<textarea
-							on:keydown={() => handleInput({ name: 'msg', val: formData.msg })}
-							name="form-message"
+							name="form-msg"
 							rows="5"
 							bind:value={formData.msg}
 						/>
@@ -207,6 +194,9 @@
 </div>
 
 <style lang="postcss">
+	.error{
+		@apply font-bold text-red-500;
+	}
 	.required::after {
 		content: '*';
 		@apply text-error-500;
