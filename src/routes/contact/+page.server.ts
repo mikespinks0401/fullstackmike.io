@@ -101,7 +101,7 @@ function hasValue(formKey: FormDataEntryValue | null){
     return   (!formKey || formKey?.toString().trim().length === 0) ? false : true
 }
 
-async function validateCFToken(secret: string, token:string, ip: string){
+async function validateCFToken(Secret: string, token:string, ip: string){
         let formData = new FormData()
 
         formData.append('secret', Secret)
