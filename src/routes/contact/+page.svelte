@@ -44,12 +44,16 @@
 	$: if(form?.error){
 			modalStore.trigger(modalError)
 		}
+	$: if(form?.success){
+			modalStore.trigger(modalSuccess)
+			form.success = false
+	}
 	onMount(() => {
-		if (form?.success) {
-			modalStore.trigger(modalSuccess);
-			form.success = false;
-			return;
-		}
+		// if (form?.success) {
+		// 	modalStore.trigger(modalSuccess);
+		// 	form.success = false;
+		// 	return;
+		// }
 		//@ts-ignore
 			// turnstile.reset(widgetId: string)			
 		let isDark = document.querySelector('html')?.classList.contains('dark');
