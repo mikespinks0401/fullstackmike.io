@@ -29,12 +29,8 @@
 	})
 </script>
 
-<!-- <div class="bg-surface-200-700-token"> -->
 <svelte:window bind:outerWidth={windowWidth}  />
-<!-- <div class="bg-surface-200-700-token brightness-105"> -->
-<!-- <div class="bg-transparent bg-surface-200-700-token brightness-105"> -->
-<div class="bg-transparent brightness-105 transition {isTop === false ? 'bg-surface-200-700-token shadow-md ' : 'shadow-none'}">
-	<!-- <div class="container mx-auto"> -->
+<div class="bg-transparent brightness-105 transition absolute w-full {isTop === false ? 'bg-surface-200-700-token shadow-md ' : 'shadow-none'}">
 	<div class="px-1 mx-auto">
 		<AppBar class="!bg-inherit" padding="p-1 md:px-4">
 			<svelte:fragment slot="lead">
@@ -50,7 +46,7 @@
 					<ul class="flex justify-start gap-8 items-center pl-8  flex-1">
 						{#each links as link}
 							<li
-								class="font-black uppercase {curPath.split('/').includes(link.name) ? "": "opacity-50 hover:opacity-80 hover:text-primary-600-300-token"}"
+								class="font-semibold uppercase {curPath.split('/').includes(link.name) ? "": "opacity-50 hover:opacity-80 hover:text-primary-600-300-token"}"
 								class:active={curPath.split('/')[1].includes(link.name)}
 							>
 								<a href={link.to}>{link.name}</a>
@@ -73,7 +69,7 @@
 					><i class=" md:hidden text-xl btn btn-icon fa-solid fa-bars" /></button
 				>
 				<a class="hidden md:block btn btn-sm variant-filled-primary text-white" href="/contact">
-					<span class="font-medium text-base text-white dark:text-white">Contact Now</span>
+					<span class="font-medium text-base px-2 text-white dark:text-white">Contact Now</span>
 				</a>
 			</svelte:fragment>
 		</AppBar>
