@@ -42,7 +42,7 @@
 			<div
 				class="py-4 grid-cols-1 flex flex-col gap-2 min-h-full relative justify-center md:bottom-6 max-w-2xl"
 			>
-				<h1 class=" !text-xl md:!text-4xl font-black" data-test="hero-title">
+				<h1 class=" !text-3xl md:!text-6xl tracking font-black pb-3" data-test="hero-title">
 					<span
 						class="bg-clip-text bg-gradient-to-tr text-transparent from-yellow-500 dark:from-yellow-300 to-orange-700 dark:to-orange-500"
 						>Ignite</span
@@ -52,13 +52,13 @@
 					Michael Spinks - Your Full Stack Developer
 				</h4>
 				<p data-test="hero-description" class="opacity-50">
-					Elevate your online presence with a fast, modern, and user-	friendly application that will surpass client demands				</p>
-				<div class="flex flex-col gap-2 pt-8 mg:pt-6 md:flex-row">
+					Elevate your online presence with a fast, modern, and user-friendly application that will surpass client demands				</p>
+				<div class="flex flex-col gap-4 pt-8 mg:pt-6 md:flex-row">
 					<a class="btn btn-lg variant-filled-primary !text-white font-black" href="/contact"
 						>Contact Now</a
 					>
 					<a
-						class="btn text-secondary-500 font-black hover:variant-ringed-secondary"
+						class="btn text-secondary-500 font-black hover:variant-soft-secondary"
 						href="/michael-spinks-resume.pdf"
 						target="_blank"
 						download
