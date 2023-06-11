@@ -36,7 +36,6 @@
 	<title>Full Stack Mike IO</title>
 	<meta name="author" content="Michael Spinks" />
 </svelte:head>
-
 <!-- Drawer -->
 <Drawer>
 	<AppBar>
@@ -64,7 +63,7 @@
 		<TheHeader bind:isTop />
 	</svelte:fragment>
 	<!-- Page Route Content -->
-	<div>
+	<div class="pt-8">
 		<slot />
 	</div>
 	<svelte:fragment slot="pageFooter">
