@@ -60,19 +60,15 @@ export const actions = {
 
         // validate CF Captcha Token
         const outcome = await validateCFToken(token.toString(),ip)
-        //send email if outcome is successful
         if(outcome?.success){
            let {accessToken} = await getAccessToken()
-        //    console.log(`Would Have Sent mail: ${mailInfo}\nwith Access-Token: ` + accessToken)
-        //    return
            let {success} = await sendMail(accessToken,mailInfo)
-           if(!success == false){
+           if(success == false){
 
             console.log("Error Sending Email - " + mailInfo)
-
            }
         }else {
-            return {success: true}
+            return {success: false, message: "there was an error, please try again"}
         }
         return { success: true}
     }
