@@ -1,6 +1,7 @@
 <script lang="ts">
 	// @ts-nocheck
 	// The ordering of these imports is critical to your app working properly
+	import { page } from "$app/stores"
 	import '../theme.postcss';
 	import { onMount } from 'svelte';
 	// If you have source.organizeImports set to true in VSCode, then it will auto change this ordering
@@ -19,8 +20,14 @@
 	import TheFooter from '$lib/components/TheFooter.svelte';
 	import { useRoutes } from '../lib/utils/homeRoutes';
 
+	
+
 	let isTop: boolean;
 	let scrollY: number;
+	let curPath: string;
+
+	$:curPath = $page.url.pathname;
+
 	const links = useRoutes('Home', 'About', 'Projects', 'Contact');
 	const closeMenu = () => {
 		drawerStore.close();
@@ -28,7 +35,7 @@
 
 	function scrollHandler(event: UIEvent & { currentTarget: EventTarget & HTMLDivElement }) {
 		isTop = event.currentTarget.scrollTop > 0 ? false : true;
-		isTop = isTop
+		isTop = isTop;
 	}
 </script>
 
@@ -38,18 +45,18 @@
 </svelte:head>
 <!-- Drawer -->
 <Drawer>
-	<AppBar>
+	<AppBar border="border-b-2 border-surface-300-600-token">
 		<svelte:fragment slot="lead">
-			<div class="flex justify-end"><p>FULLSTACKMIKE</p></div>
+			<div class="flex justify-end"><p class="font-black">FULLSTACKMIKE</p></div>
 		</svelte:fragment>
 		<svelte:fragment slot="trail">
 			<div class="flex justify-end"><LightSwitch /></div>
 		</svelte:fragment>
 	</AppBar>
-	<ul class="flex flex-col">
+	<ul class="flex flex-col divide-y-2">
 		{#each links as link}
-			<li class="w-full">
-				<a on:click={closeMenu} class="w-full" href={link.to}>{link.name}</a>
+			<li class="w-full flex">
+				<a on:click={closeMenu} class="w-full flex justify-center py-2" href={link.to} class:text-primary-500="{curPath.split("/").includes(link.name)}">{link.name}</a>
 			</li>
 		{/each}
 	</ul>
