@@ -8,9 +8,7 @@ const restMailEndpoint = env.MAIL_API_REST_URL
 
 
 export interface mailer {
-    sendMail: Function
-    refreshAccessToken: Function
-
+    sendMail: (info:SendMailInfo, options?: object ) => Promise<{ success: boolean}>
 }
 export interface SendMailInfo {
     fromAddress: string
