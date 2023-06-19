@@ -6,8 +6,9 @@
 	import { dev } from '$app/environment';
 	import { onMount, tick } from 'svelte';
 	import { enhance } from '$app/forms';
-	import { modalStore } from '@skeletonlabs/skeleton';
+	import { modalStore, ProgressRadial } from '@skeletonlabs/skeleton';
 	import { env } from '$env/dynamic/public';
+	import { element } from 'svelte/internal';
 
 	type inputTypeAndVal = {
 		name: string;
@@ -26,7 +27,8 @@
 	const modalSuccess: ModalSettings = {
 		type: 'alert',
 		title: 'Success',
-		body: 'Form Successfully Submitted',
+		body: `Thank you for reaching out. Look for a reply within the next 24-48 hours.`,
+		modalClasses: "dark:bg-surface-700",
 		buttonTextCancel: 'OK'
 	};
 	
@@ -41,19 +43,15 @@
 	let widgetId = "";
 	export let form: ActionData;
 
-	$: if(form?.error){
-			modalStore.trigger(modalError)
-		}
 	$: if(form?.success){
 			modalStore.trigger(modalSuccess)
 			form.success = false
 	}
+
+	$: if(form?.formatError){
+		console.log(form.formatError)
+	}
 	onMount(() => {
-		// if (form?.success) {
-		// 	modalStore.trigger(modalSuccess);
-		// 	form.success = false;
-		// 	return;
-		// }
 		//@ts-ignore
 			// turnstile.reset(widgetId: string)			
 		let isDark = document.querySelector('html')?.classList.contains('dark');
@@ -70,16 +68,16 @@
 				},
 				theme: useTheme
 			});
-			console.log(widgetId)
+			// console.log(widgetId)
 		};
 
 	});
 
-	const info = {
-		name: 'Michael Spinks',
-		location: 'Houston, Tx',
-		number: '713 766 8719'
-	};
+	const infoElements = [
+		{key:"name", value:'Michael Spinks', faIcon:"fa-solid fa-user"},
+		{key:"location", value:'San Diego, Ca', faIcon:"fa-solid fa-mobile"},
+		{key: "number", value: '(281) 556-3287', faIcon:"fa-solid fa-location-pin"}
+	];
 
 	let formData = {
 		name: '',
@@ -98,7 +96,12 @@
 		if (isSubmitted != true) {
 			return;
 		}
-	};
+	}
+
+	const isNotMinimumLength = (name: string, len: number) => {
+		return form?.missingData && form?.missingData.includes(name) && formData.name.length < len 
+	}
+
 </script>
 
 <svelte:head>
@@ -114,10 +117,11 @@
 		<div class="flex flex-col justify-center">
 			<h1 class="text-4xl pt-4 text-center">Contact</h1>
 		</div>
+		<!-- <ProgressRadial /> -->
 		<div class="px-4 grid grid-cols-12">
 			<div class="col-span-12 max-w-xl mx-auto my-12">
 				<p class="font-semibold">
-					Thank you for reaching out. Please fill out the form below and I will get back to you as
+					Please fill out the form below and I will get back to you as
 					soon as possible.
 				</p>
 			</div>
@@ -129,25 +133,30 @@
 					use:enhance
 				>
 					<div class="flex-1">
-						<label for="form-name" class="required label inline">Name</label>{#if form?.error && form?.missingData.includes('name')}<span class="error">NAME REQUIRED</span>{/if}
+						<label for="form-name" class="required label inline">Name</label>
 						<div class="flex flex-col">
 							<input
 								type="text"
 								name="form-name"
-								class="flex-1"
+								class="flex {form?.error && formData.name.length < 1 ? 'input-error' : ''}"
 								placeholder="Name"
 								bind:value={formData.name}
-							/>
+								maxlength=100
+							/>{#if form?.missingData && form?.missingData.includes('name') && formData.name.length < 1 }<span class="error">NAME REQUIRED</span>{/if}
 						</div>
 					</div>
 					<div class="">
 						<label for="form-email" class="label required">Email</label>
 						<input
 							type="email"
+						
 							name="form-email"
+							class="{form?.error && formData.email.length < 1 ? 'input-error' : ''}"
 							placeholder="Email"
+							maxlength=100
 							bind:value={formData.email}
-						/>
+						/>{#if form?.missingData && form?.missingData.includes('email') && formData.email.length < 1|| form?.error && z.string().email().safeParse(formData.email).success == false}<span class="error">VALID EMAIL REQUIRED</span>{/if}
+
 					</div>
 					<div class="">
 						<label for="form-phoneNumber" class="label">Phone Number</label>
@@ -155,6 +164,7 @@
 							type="string"
 							name="form-phoneNumber"
 							placeholder="###-###-####"
+							maxlength=15
 							bind:value={formData.phoneNumber}
 						/>
 					</div>
@@ -164,16 +174,21 @@
 							type="text"
 							name="form-subject"
 							placeholder="Subject"
+							class="{form?.error && formData.subject.length < 1 ? 'input-error' : ''}"
+							maxlength=50
 							bind:value={formData.subject}
-						/>
+						/>{#if form?.missingData && form?.missingData.includes('subject') && formData.subject.length < 1 }<span class="error">SUBJECT REQUIRED</span>{/if}
 					</div>
 					<div class="w-full">
 						<label for="form-message" class="label required">Enter Your Message</label>
 						<textarea
 							name="form-msg"
+							class="{form?.error && formData.msg.length < 1 ? 'input-error' : ''}"
 							rows="5"
+							maxlength=1000
 							bind:value={formData.msg}
-						/>
+						/>{#if form?.missingData && form?.missingData.includes('msg') && formData.msg.length < 5}<span class="error">MESSAGE REQUIRED</span>{/if}
+							
 					</div>
 					<!--Turnstile-->
 					<div id="captcha-div" class="mb-1" />
@@ -186,11 +201,17 @@
 				</form>
 			</div>
 			<div class="col-span-12 my-8 md:mt-0 md:col-span-4">
-				<div class="text-center pb-8">Contact Information</div>
-				<div class="flex flex-col font-semibold">
-					<p>{info.name}</p>
-					<p>{info.number}</p>
-					<p>{info.location}</p>
+				<div class="flex h-full justify-center flex-col">
+					{#each infoElements as infoItem}
+					<div class="flex gap-4 text-lg">
+						<div>
+							<div class="w-4 h-4 bg-secondary-500 relative">
+								<icon class=" absolute -right-1 -bottom-2 text-sm  {infoItem.faIcon}">
+							</div>
+						</div>
+						<div class="">{infoItem.value}</div>
+					</div>
+					{/each}
 				</div>
 			</div>
 		</div>
