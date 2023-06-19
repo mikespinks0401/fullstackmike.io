@@ -6,7 +6,7 @@
 	import type { DrawerSettings } from '@skeletonlabs/skeleton';
 
 	const links = useRoutes('about', 'projects', 'contact');
-	export let isTop: boolean
+	export let isTop: boolean;
 
 	let curPath: string;
 	let windowWidth: number;
@@ -22,16 +22,20 @@
 		drawerStore.open(drawerSettings);
 	};
 
-	onMount(()=>{
-		window.addEventListener("scroll", () => {
-			console.log("Hello")
-		})
-	})
+	onMount(() => {
+		window.addEventListener('scroll', () => {
+			console.log('Hello');
+		});
+	});
 </script>
 
-<svelte:window bind:outerWidth={windowWidth}  />
-<div class="bg-transparent brightness-105 transition absolute w-full {isTop === false ? 'bg-surface-200-700-token shadow-md ' : 'shadow-none'}">
-	<div class="px-1 mx-auto">
+<svelte:window bind:outerWidth={windowWidth} />
+<div
+	class="bg-transparent brightness-105 transition absolute w-full duration-75 z-50 {isTop === false
+		? 'bg-surface-100-800-token shadow-md '
+		: 'shadow-none'}"
+>
+	<div class="px-1 mx-auto ">
 		<AppBar class="!bg-inherit" padding="p-1 md:px-4">
 			<svelte:fragment slot="lead">
 				<div>
@@ -43,10 +47,12 @@
 			</svelte:fragment>
 			<svelte:fragment slot="default">
 				<div class="hidden md:flex">
-					<ul class="flex justify-start gap-8 items-center pl-8  flex-1">
+					<ul class="flex justify-start gap-8 items-center pl-8 flex-1">
 						{#each links as link}
 							<li
-								class="font-semibold uppercase {curPath.split('/').includes(link.name) ? "": "opacity-50 hover:opacity-80 hover:text-primary-600-300-token"}"
+								class="font-semibold uppercase {curPath.split('/').includes(link.name)
+									? ''
+									: 'opacity-50 hover:opacity-80 hover:text-primary-600-300-token'}"
 								class:active={curPath.split('/')[1].includes(link.name)}
 							>
 								<a href={link.to}>{link.name}</a>
@@ -55,7 +61,7 @@
 					</ul>
 					<div class="hidden lg:flex-1 lg:flex justify-end text-sm font-semibold">
 						<a
-							class="btn btn-md bg-initial text-sm text-secondary-500 hover:variant-soft-secondary "
+							class="btn btn-md bg-initial text-sm text-secondary-500 hover:variant-soft-secondary"
 							href="/michael-spinks-resume.pdf"
 							download
 						>
@@ -80,6 +86,4 @@
 	.active {
 		@apply text-primary-600-300-token opacity-100;
 	}
-
-
 </style>
