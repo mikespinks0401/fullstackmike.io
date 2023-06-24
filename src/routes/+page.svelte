@@ -48,12 +48,12 @@
 						>Ignite</span
 					> Your Web Presence 🔥
 				</h1>
-				<h4
+				<h2
 					class="md:block md:text-xl !opacity-70 font-semibold tracking-tighter"
 					data-test="hero-subtitle"
 				>
 					Michael Spinks - Your Full Stack Developer
-				</h4>
+				</h2>
 				<p data-test="hero-description" class="opacity-50">
 					Elevate your online presence with a fast, modern, and user-friendly application that will
 					surpass client demands
