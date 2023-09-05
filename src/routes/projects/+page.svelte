@@ -32,7 +32,16 @@
 			href: 'https://mikespinks0401.github.io/project-news-homepage-layout/',
 			img: 'project-newsHomePage.png',
 			hovered: false
-		}
+		},
+		{
+			name: 'The Alchemy Of Intimacy Landing Page',
+			description:
+				'A responsive course landing page built with sveltekit and hosted on github pages.',
+			href: 'https://awakeinthedreamschool.com/p/alchemy-of-intimacy',
+			img: 'landing-page.png',
+			hovered: false
+		},
+
 	];
 </script>
 
