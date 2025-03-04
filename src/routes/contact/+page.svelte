@@ -72,7 +72,7 @@
 
 	const infoElements = [
 		{ key: 'name', value: 'Michael Spinks', faIcon: 'fa-solid fa-user' },
-		{ key: 'location', value: 'San Diego, Ca', faIcon: 'fa-solid fa-location-pin' },
+		{ key: 'location', value: 'Houston, Tx', faIcon: 'fa-solid fa-location-pin' },
 		{ key: 'number', value: '(281) 556-3287', faIcon: 'fa-solid fa-mobile' }
 	];
 
