@@ -35,7 +35,7 @@
 		? 'bg-surface-100-800-token shadow-md '
 		: 'shadow-none'}"
 >
-	<div class="px-1 mx-auto ">
+	<div class="px-1 mx-auto">
 		<AppBar class="!bg-inherit" padding="p-1 md:px-4">
 			<svelte:fragment slot="lead">
 				<div>
@@ -62,7 +62,7 @@
 					<div class="hidden lg:flex-1 lg:flex justify-end text-sm font-semibold">
 						<a
 							class="btn btn-md bg-initial text-sm text-secondary-500 hover:variant-soft-secondary"
-							href="/michael-spinks-resume.pdf"
+							href="/MichaelSpinksResume2025.pdf"
 							download
 						>
 							<span> <i class="fa-solid fa-file-lines" /></span><span>Download Resume</span>
