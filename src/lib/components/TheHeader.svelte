@@ -62,7 +62,7 @@
 					<div class="hidden lg:flex-1 lg:flex justify-end text-sm font-semibold">
 						<a
 							class="btn btn-md bg-initial text-sm text-secondary-500 hover:variant-soft-secondary"
-							href="/MichaelSpinksResume2025.pdf"
+							href="/michael-spinks-resume.pdf"
 							download
 						>
 							<span> <i class="fa-solid fa-file-lines" /></span><span>Download Resume</span>
